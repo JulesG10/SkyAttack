@@ -42,7 +42,7 @@
     <ClCompile Include="src\gui\SKLabel.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
-    <ClCompile Include="src\SKMenuTransition.cpp">
+    <ClCompile Include="src\menu\SKMenuTransition.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
   </ItemGroup>
@@ -71,7 +71,7 @@
     <ClInclude Include="src\gui\SKLabel.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
-    <ClInclude Include="src\SKMenuTransition.h">
+    <ClInclude Include="src\menu\SKMenuTransition.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
   </ItemGroup>

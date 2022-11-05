@@ -1,7 +1,8 @@
 #pragma once
 
 #include "SKState.h"
-#include "SKMenuTransition.h"
+
+#include "menu/SKMenuTransition.h"
 
 #include "gui/SKButton.h"
 #include "gui/SKLabel.h"
@@ -22,7 +23,9 @@ private:
 	SKButton* m_playButton;
 	SKButton* m_settingsButton;
 	SKButton* m_modsButton;
-	SKLabel* m_skText;
+	
+	Vector2 m_titlePosition;
+	const float m_titleScale = 5;
 
 	std::string m_loadText;
 	Vector2 m_textPosition;

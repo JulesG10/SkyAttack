@@ -1,6 +1,6 @@
 #include "SKMenu.h"
 
-SKMenu::SKMenu(SKState* state) : m_state(state)
+SKMenu::SKMenu(SKState* state) : m_state(state), m_titlePosition({0,0})
 {
 	this->m_loadText = "Loading...";
 	this->m_textSize = 30;
@@ -29,8 +29,6 @@ SKMenu::SKMenu(SKState* state) : m_state(state)
 		40
 		}, WHITE, BLANK);
 
-	this->m_skText = new SKLabel("Sky Attack", { this->m_state->renderSize.x/2, 60 }, 70, WHITE, {1,0});
-	
 	this->m_transition = new SKMenuTransition(this->m_state);
 }
 
@@ -47,6 +45,7 @@ void SKMenu::UpdateFrame()
 
 	if (this->m_state->loading)
 	{
+		this->m_transition->ResetIn();
 		DrawText(this->m_loadText.c_str(), this->m_textPosition.x, this->m_textPosition.y, this->m_textSize, WHITE);
 		return;
 	}
@@ -58,7 +57,11 @@ void SKMenu::UpdateFrame()
 		this->m_modsButton->UpdateFrame();
 		this->m_settingsButton->UpdateFrame();
 
-		this->m_skText->UpdateFrame();
+		if (!this->m_titlePosition.x)
+		{
+			this->m_titlePosition.x = (this->m_state->renderSize.x - (this->m_state->textures[MENU_TITLE].width * this->m_titleScale)) / 2.f;
+		}
+		DrawTextureEx(this->m_state->textures[MENU_TITLE], this->m_titlePosition, 0, this->m_titleScale, WHITE);
 	}
 	else 
 	{

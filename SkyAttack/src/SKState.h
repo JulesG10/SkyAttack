@@ -55,21 +55,24 @@ typedef enum {
 
 	BOOB_TRAP = 43,
 
-	NID_LAST_TILE = 145,
 
-	CLOUDS_0 = 146,
-	CLOUDS_1 = 147,
-	CLOUDS_2 = 148,
-	CLOUDS_3 = 149,
-	CLOUDS_4 = 150,
-	CLOUDS_5 = 151,
+	MENU_TITLE = 145,
 
-	NID_LAST_CLOUD = 152,
+	NID_LAST_TILE = 146,
+
+	CLOUDS_0 = 147,
+	CLOUDS_1 = 148,
+	CLOUDS_2 = 149,
+	CLOUDS_3 = 150,
+	CLOUDS_4 = 151,
+	CLOUDS_5 = 152,
+
+	NID_LAST_CLOUD = 153,
 
 } SKTextureId; // TODO: update textures
 
 #define SK_TEXTURE_START 0
-#define SK_TEXTURE_END 152
+#define SK_TEXTURE_END 153
 
 class SKState {
 public:

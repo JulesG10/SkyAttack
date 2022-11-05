@@ -8,12 +8,13 @@ SKMenuTransition::SKMenuTransition(SKState* state) : m_state(state), m_y(-100), 
 void  SKMenuTransition::Draw()
 {
 	Color tint = { 255, 255, 255, this->m_alpha };
-	bool change = true;
+	bool change = false;
 	for (int i = -300; i < (int)this->m_state->renderSize.y; i++)
 	{
 		Texture cloud = this->m_state->textures[SKTextureId::CLOUDS_1];
 		if (change)
 		{
+			
 			cloud = this->m_state->textures[SKTextureId::CLOUDS_2];
 		}
 		change = !change;
@@ -34,6 +35,8 @@ void  SKMenuTransition::Draw()
 
 void SKMenuTransition::AnimateOut()
 {
+	this->FormatAlpha();
+
 	if (this->OutEnd())
 	{
 		this->Draw();
@@ -42,6 +45,7 @@ void SKMenuTransition::AnimateOut()
 
 	this->m_y -= this->m_speed * 200 * GetFrameTime();
 	this->m_alpha -= this->m_speed * 180 * GetFrameTime();
+	this->FormatAlpha();
 
 	this->Draw();
 }
@@ -49,11 +53,7 @@ void SKMenuTransition::AnimateOut()
 
 void SKMenuTransition::AnimateIn()
 {
-	if (this->m_alpha >= 255)
-	{
-		this->m_alpha = 255;
-	}
-
+	this->FormatAlpha();
 	if (this->InEnd())
 	{
 		this->Draw();
@@ -62,6 +62,8 @@ void SKMenuTransition::AnimateIn()
 
 	this->m_y += this->m_speed * 200 * GetFrameTime();
 	this->m_alpha += this->m_speed * 180 * GetFrameTime();
+	
+	this->FormatAlpha();
 	this->Draw();
 }
 
@@ -88,6 +90,17 @@ void SKMenuTransition::PageTransition(float delay)
 	}
 
 	this->AnimateOut();
+}
+
+void SKMenuTransition::FormatAlpha()
+{
+	if (this->m_alpha >= 255)
+	{
+		this->m_alpha = 255;
+	}else if (this->m_alpha <= 0)
+	{
+		this->m_alpha = 0;
+	}
 }
 
 void SKMenuTransition::ResetPage()

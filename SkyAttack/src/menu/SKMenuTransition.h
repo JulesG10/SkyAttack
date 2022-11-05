@@ -1,6 +1,6 @@
 #pragma once
-#include "../stdafx.h"
-#include "SKState.h"
+#include "../../stdafx.h"
+#include "../SKState.h"
 
 enum SKMenuTransitionMode {
 	FADE_IN,
@@ -26,6 +26,8 @@ private:
 
 	bool InEnd();
 	bool OutEnd();
+
+	void FormatAlpha();
 
 	SKState* m_state;
 	float m_alpha;

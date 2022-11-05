@@ -66,7 +66,7 @@ bool SKGameCore::Init(int argc, char** argv)
         std::cerr.clear();
         std::cin.clear();
 
-        SetTraceLogLevel(LOG_ALL);
+        SetTraceLogLevel(LOG_WARNING | LOG_ERROR | LOG_FATAL);
     }
 #else
     SetTraceLogLevel(LOG_NONE);
@@ -149,6 +149,13 @@ void* LoadResources(void* data)
         self->m_state->loading = true;
         self->m_state->cpuloading = true;
         
+#ifdef _DEBUG
+        std::string appdir(GetWorkingDirectory());
+        appdir += "\\";
+#else
+        std::string appdir(GetApplicationDirectory());
+#endif // _DEBUG
+        
         for (size_t i = SK_TEXTURE_START; i <= SK_TEXTURE_END; i++)
         {
             if (i != (int)SKTextureId::NID_LAST_SHIP)
@@ -174,7 +181,7 @@ void* LoadResources(void* data)
 
                 if (SKValidTextureId(textureId))
                 {
-                    std::string path(std::string(GetApplicationDirectory()) + shortpath + SKTexureIdToString(prefix, textureId) + ".png");
+                    std::string path(appdir + shortpath + SKTexureIdToString(prefix, textureId) + ".png");
                     self->m_state->images[id] = LoadImage(path.c_str());
 
                 }
