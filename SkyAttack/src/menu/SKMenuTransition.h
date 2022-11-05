@@ -7,15 +7,23 @@ enum SKMenuTransitionMode {
 	FADE_OUT,
 };
 
+enum SKMenuPage {
+	PAGE_HOME,
+	PAGE_SETTINGS,
+	PAGE_MODS,
+	PAGE_GAME
+};
+
 class SKMenuTransition
 {
-private:
+public:
 	SKMenuTransition(SKState* state);
-	friend class SKMenu;
-
+	
 	void PageTransition(float msdelay = 0);
 	void ResetPage();
 
+	SKMenuTransitionMode GetMode();
+private:
 	void AnimateIn();
 	void AnimateOut();
 

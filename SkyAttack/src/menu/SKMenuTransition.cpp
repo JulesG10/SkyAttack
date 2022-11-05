@@ -5,6 +5,11 @@ SKMenuTransition::SKMenuTransition(SKState* state) : m_state(state), m_y(-100), 
 	this->ResetPage();
 }
 
+SKMenuTransitionMode SKMenuTransition::GetMode()
+{
+	return this->m_mode;
+}
+
 void  SKMenuTransition::Draw()
 {
 	Color tint = { 255, 255, 255, this->m_alpha };

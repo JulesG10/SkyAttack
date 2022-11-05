@@ -4,9 +4,12 @@
 
 #include "menu/SKMenuTransition.h"
 
+#include "menu/SKMenuSettings.h"
+//#include "menu/SKMenuGame.h"
+//#include "menu/SKMenuMods.h"
+
 #include "gui/SKButton.h"
 #include "gui/SKLabel.h"
-
 
 class SKMenu
 {
@@ -16,9 +19,17 @@ public:
 
 	void UpdateFrame();
 private:
+	void DrawHomePage();
+
 	SKState* m_state;
+	SKMenuPage m_page;
 
 	SKMenuTransition* m_transition;
+	
+	SKMenuSettings* m_settings;
+	//SKMenuMods* m_mods;
+	//SKMenuGame* m_game;
+
 
 	SKButton* m_playButton;
 	SKButton* m_settingsButton;

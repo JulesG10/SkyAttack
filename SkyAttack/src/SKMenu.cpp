@@ -1,6 +1,6 @@
 #include "SKMenu.h"
 
-SKMenu::SKMenu(SKState* state) : m_state(state), m_titlePosition({0,0})
+SKMenu::SKMenu(SKState* state) : m_state(state), m_titlePosition({ 0,0 })
 {
 	this->m_loadText = "Loading...";
 	this->m_textSize = 30;
@@ -8,13 +8,13 @@ SKMenu::SKMenu(SKState* state) : m_state(state), m_titlePosition({0,0})
 	Vector2 textSize = MeasureTextEx(GetFontDefault(), this->m_loadText.c_str(), this->m_textSize, 1);
 	this->m_textPosition = { (this->m_state->renderSize.x - textSize.x) / 2.f, (this->m_state->renderSize.y - textSize.y) / 2.f };
 
-	this->m_playButton = new SKButton(this->m_state, "Play Multi", { 
+	this->m_playButton = new SKButton(this->m_state, "Play Multi", {
 		(this->m_state->renderSize.x - 200) / 2,
 		(this->m_state->renderSize.y - 150) / 2,
 		200,
 		40
 		}, WHITE, BLANK);
-	
+
 	this->m_modsButton = new SKButton(this->m_state, "Mods", {
 		(this->m_state->renderSize.x - 200) / 2,
 		(this->m_state->renderSize.y - 50) / 2,
@@ -30,32 +30,43 @@ SKMenu::SKMenu(SKState* state) : m_state(state), m_titlePosition({0,0})
 		}, WHITE, BLANK);
 
 	this->m_transition = new SKMenuTransition(this->m_state);
+
+	this->m_page = SKMenuPage::PAGE_HOME;
+
+	this->m_settings = new SKMenuSettings(this->m_state, this->m_transition, &this->m_page);
+	// game
+	// mods
 }
 
 SKMenu::~SKMenu()
 {
 }
 
-
-void SKMenu::UpdateFrame()
+void SKMenu::DrawHomePage()
 {
-	static bool mode = false;
-
 	DrawRectangle(0, 0, this->m_state->renderSize.x, this->m_state->renderSize.y, { 150, 210, 50, 255 });
-
 	if (this->m_state->loading)
 	{
-		this->m_transition->ResetIn();
 		DrawText(this->m_loadText.c_str(), this->m_textPosition.x, this->m_textPosition.y, this->m_textSize, WHITE);
 		return;
 	}
 
-	if (this->m_transition->m_mode == SKMenuTransitionMode::FADE_OUT)
+	if (this->m_transition->GetMode() == SKMenuTransitionMode::FADE_OUT)
 	{
-		this->m_playButton->UpdateFrame();
+		if (this->m_playButton->UpdateFrame())
+		{
+			this->m_page = SKMenuPage::PAGE_GAME;
+		}
 
-		this->m_modsButton->UpdateFrame();
-		this->m_settingsButton->UpdateFrame();
+		if (this->m_modsButton->UpdateFrame())
+		{
+			this->m_page = SKMenuPage::PAGE_MODS;
+		}
+
+		if (this->m_settingsButton->UpdateFrame())
+		{
+			this->m_page = SKMenuPage::PAGE_SETTINGS;
+		}
 
 		if (!this->m_titlePosition.x)
 		{
@@ -63,9 +74,36 @@ void SKMenu::UpdateFrame()
 		}
 		DrawTextureEx(this->m_state->textures[MENU_TITLE], this->m_titlePosition, 0, this->m_titleScale, WHITE);
 	}
-	else 
+	else
 	{
 		DrawText(this->m_loadText.c_str(), this->m_textPosition.x, this->m_textPosition.y, this->m_textSize, WHITE);
 	}
 	this->m_transition->PageTransition(2000);
+
+	if (this->m_page != SKMenuPage::PAGE_HOME)
+	{
+		this->m_transition->ResetPage();
+	}
+}
+
+void SKMenu::UpdateFrame()
+{
+	switch (this->m_page)
+	{
+	case SKMenuPage::PAGE_HOME:
+		this->DrawHomePage();
+		break;
+	case SKMenuPage::PAGE_SETTINGS:
+		this->m_settings->UpdateFrame();
+		break;
+	case SKMenuPage::PAGE_MODS:
+		DrawRectangle(0, 0, this->m_state->renderSize.x, this->m_state->renderSize.y, BLACK);
+		//this->m_mods->UpdateFrame();
+		break;
+	case SKMenuPage::PAGE_GAME:
+		DrawRectangle(0, 0, this->m_state->renderSize.x, this->m_state->renderSize.y, BLACK);
+		//this->m_game->UpdateFrame();
+		break;
+
+	}
 }

@@ -136,6 +136,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="src\menu\SKMenuSettings.cpp" />
     <ClCompile Include="src\menu\SKMenuTransition.cpp" />
     <ClCompile Include="src\gui\SKLabel.cpp" />
     <ClCompile Include="src\gui\SKButton.cpp" />
@@ -147,6 +148,7 @@
     <ClCompile Include="stdafx.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\menu\SKMenuSettings.h" />
     <ClInclude Include="src\menu\SKMenuTransition.h" />
     <ClInclude Include="src\gui\SKLabel.h" />
     <ClInclude Include="src\gui\SKButton.h" />
