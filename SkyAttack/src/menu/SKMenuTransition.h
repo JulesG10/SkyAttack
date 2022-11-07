@@ -22,6 +22,8 @@ public:
 	void PageTransition(float msdelay = 0);
 	void ResetPage();
 
+	void ShipBackground(float speed  = 200.f);
+
 	SKMenuTransitionMode GetMode();
 private:
 	void AnimateIn();
@@ -42,6 +44,8 @@ private:
 	float m_y;
 	float m_timer = 0;
 	SKMenuTransitionMode m_mode = SKMenuTransitionMode::FADE_IN;
+
+	std::vector<std::pair<Vector2, SKTextureId>> m_ships;
 
 	const float m_speed = 2.5;
 	const float m_scale = 10;

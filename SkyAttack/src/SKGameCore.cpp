@@ -20,7 +20,7 @@ int SKGameCore::Start(int argc, char** argv)
     // create map
     this->m_state = new SKState();
 
-    this->m_renderTexture = LoadRenderTexture(this->m_state->renderSize.x, this->m_state->renderSize.y);
+    this->m_renderTexture = LoadRenderTexture(this->m_state->m_renderSize.x, this->m_state->m_renderSize.y);
     this->m_menu = new SKMenu(this->m_state);
 
     pthread_t resThread;
@@ -36,7 +36,7 @@ int SKGameCore::Start(int argc, char** argv)
         EndTextureMode();
 
         BeginDrawing();
-        DrawTexturePro(this->m_renderTexture.texture, { 0, 0, this->m_state->renderSize.x, -this->m_state->renderSize.y }, { 0,0, (float)GetRenderWidth(), (float)GetRenderHeight() }, { 0,0 }, 0, WHITE);
+        DrawTexturePro(this->m_renderTexture.texture, { 0, 0, this->m_state->m_renderSize.x, -this->m_state->m_renderSize.y }, { 0,0, (float)GetRenderWidth(), (float)GetRenderHeight() }, { 0,0 }, 0, WHITE);
 
 #ifdef _DEBUG
         DrawFPS(0, 0);
@@ -106,24 +106,26 @@ bool SKGameCore::Init(int argc, char** argv)
 
 void SKGameCore::UploadTextures()
 {
-    if (!this->m_state->cpuloading && this->m_state->loading)
+    if (!this->m_state->m_cpuloading && this->m_state->m_loading)
     {
         for (size_t i = SK_TEXTURE_START; i <= SK_TEXTURE_END; i++)
         {
             SKTextureId id = (SKTextureId)i;
-            if (this->m_state->images[id].data)
+            if (this->m_state->m_images[id].data)
             {
-                this->m_state->textures[id] = LoadTextureFromImage(this->m_state->images[id]);
-                UnloadImage(this->m_state->images[id]);
-                this->m_state->images.erase(id);
+                this->m_state->m_textures[id] = LoadTextureFromImage(this->m_state->m_images[id]);
+                // SetTextureWrap(this->m_state->m_textures[id], TEXTURE_WRAP_CLAMP);
+
+                UnloadImage(this->m_state->m_images[id]);
+                this->m_state->m_images.erase(id);
             }
         }
 
-        if (this->m_state->images.size() != 0)
+        if (this->m_state->m_images.size() != 0)
         {
-            this->m_state->images.clear();
+            this->m_state->m_images.clear();
         }
-        this->m_state->loading = false;
+        this->m_state->m_loading = false;
     }
 }
 
@@ -135,7 +137,7 @@ void SKGameCore::UnLoadResources()
         SKTextureId id = (SKTextureId)i;
         if (SKValidTextureId(id))
         {
-            UnloadTexture(this->m_state->textures[id]);
+            UnloadTexture(this->m_state->m_textures[id]);
         }
     }
 
@@ -146,8 +148,8 @@ void* LoadResources(void* data)
     SKGameCore* self = static_cast<SKGameCore*>(data);
     if (self)
     {
-        self->m_state->loading = true;
-        self->m_state->cpuloading = true;
+        self->m_state->m_loading = true;
+        self->m_state->m_cpuloading = true;
         
 #ifdef _DEBUG
         std::string appdir(GetWorkingDirectory());
@@ -182,7 +184,7 @@ void* LoadResources(void* data)
                 if (SKValidTextureId(textureId))
                 {
                     std::string path(appdir + shortpath + SKTexureIdToString(prefix, textureId) + ".png");
-                    self->m_state->images[id] = LoadImage(path.c_str());
+                    self->m_state->m_images[id] = LoadImage(path.c_str());
 
                 }
             }
@@ -191,7 +193,7 @@ void* LoadResources(void* data)
 
         // TODO: load sounds
 
-        self->m_state->cpuloading = false;
+        self->m_state->m_cpuloading = false;
         
         return EXIT_SUCCESS;
     }

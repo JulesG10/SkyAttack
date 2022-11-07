@@ -1,6 +1,6 @@
 #include "SKState.h"
 
-SKState::SKState() : loading(true), cpuloading(true), textures({}), images({})
+SKState::SKState() : m_loading(true), m_cpuloading(true), m_textures({}), m_images({})
 {
 }
 
@@ -11,11 +11,12 @@ SKState::~SKState()
 Vector2 SKState::GetMouse()
 {
 	Vector2 pos = {
-		(this->renderSize.x * GetMousePosition().x) / GetRenderWidth(),
-		(this->renderSize.y * GetMousePosition().y) / GetRenderHeight()
+		(this->m_renderSize.x * GetMousePosition().x) / GetRenderWidth(),
+		(this->m_renderSize.y * GetMousePosition().y) / GetRenderHeight()
 	};
 	return pos;
 }
+
 
 std::string SKTexureIdToString(std::string prefix, SKTextureId id)
 {

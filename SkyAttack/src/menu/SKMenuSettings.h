@@ -4,6 +4,7 @@
 #include "../SKState.h"
 #include "SKMenuTransition.h"
 
+
 class SKMenuSettings
 {
 private:
@@ -12,6 +13,8 @@ private:
 	friend class SKMenu;
 
 	void UpdateFrame();
+
+
 
 	SKMenuPage* m_page;
 	SKState* m_state;

@@ -10,6 +10,7 @@
 
 #include "gui/SKButton.h"
 #include "gui/SKLabel.h"
+#include "gui/SKInput.h"
 
 class SKMenu
 {
@@ -31,6 +32,7 @@ private:
 	//SKMenuGame* m_game;
 
 
+	SKInput* m_pseudo;
 	SKButton* m_playButton;
 	SKButton* m_settingsButton;
 	SKButton* m_modsButton;

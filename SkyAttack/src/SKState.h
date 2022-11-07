@@ -74,6 +74,8 @@ typedef enum {
 #define SK_TEXTURE_START 0
 #define SK_TEXTURE_END 153
 
+
+
 class SKState {
 public:
 	/*static SKState& Instance()
@@ -94,12 +96,12 @@ public:
 
 	Vector2 GetMouse();
 
-	const Vector2 renderSize = { 1366, 768 };
+	const Vector2 m_renderSize = { 1366, 768 };
 
-	bool cpuloading;
-	bool loading;
-	std::unordered_map<SKTextureId, Image> images;
-	std::unordered_map<SKTextureId, Texture2D> textures;
+	bool m_cpuloading;
+	bool m_loading;
+	std::unordered_map<SKTextureId, Image> m_images = {};
+	std::unordered_map<SKTextureId, Texture2D> m_textures = {};
 } ;
 
 std::string SKTexureIdToString(std::string prefix, SKTextureId id);
