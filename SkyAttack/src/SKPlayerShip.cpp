@@ -10,10 +10,7 @@ SKPlayerShip::~SKPlayerShip()
 
 void SKPlayerShip::UpdateFrame()
 {
-	if (this->m_state->m_loading)
-	{
-		return;
-	}
+	
 
 
 }

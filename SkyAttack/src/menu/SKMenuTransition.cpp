@@ -161,6 +161,11 @@ void SKMenuTransition::ShipBackground(float speed)
 	}
 }
 
+bool SKMenuTransition::IsWaiting()
+{
+	return this->m_timer != -1;
+}
+
 void SKMenuTransition::ResetIn()
 {
 	this->m_y = -800;

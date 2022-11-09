@@ -1,6 +1,6 @@
 #include "SKLabel.h"
 
-SKLabel::SKLabel(std::string text, Vector2 position,int fontsize, Color color, Vector2 center) : m_text(text), m_color(color), m_fontsize(fontsize)
+SKLabel::SKLabel(std::string text, Vector2 position,int fontsize, Color color, Vector2 center) : SKGui(nullptr), m_text(text), m_color(color), m_fontsize(fontsize)
 {
 	Vector2 size = MeasureTextEx(GetFontDefault(), this->m_text.c_str(), this->m_fontsize, 1);
 	this->m_position = {
@@ -13,7 +13,8 @@ SKLabel::~SKLabel()
 {
 }
 
-void SKLabel::UpdateFrame()
+bool SKLabel::UpdateFrame()
 {
 	DrawText(this->m_text.c_str(), this->m_position.x, this->m_position.y, this->m_fontsize, this->m_color);
+	return false;
 }

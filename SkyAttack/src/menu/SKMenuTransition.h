@@ -22,9 +22,10 @@ public:
 	void PageTransition(float msdelay = 0);
 	void ResetPage();
 
-	void ShipBackground(float speed  = 200.f);
+	void ShipBackground(float speed  = 20.f);
 
 	SKMenuTransitionMode GetMode();
+	bool IsWaiting();
 private:
 	void AnimateIn();
 	void AnimateOut();

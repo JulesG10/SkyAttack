@@ -18,6 +18,7 @@ int SKGameCore::Start(int argc, char** argv)
 
     // TODO: init game state
     // create map
+
     this->m_state = new SKState();
 
     this->m_renderTexture = LoadRenderTexture(this->m_state->m_renderSize.x, this->m_state->m_renderSize.y);
@@ -185,6 +186,7 @@ void* LoadResources(void* data)
                 {
                     std::string path(appdir + shortpath + SKTexureIdToString(prefix, textureId) + ".png");
                     self->m_state->m_images[id] = LoadImage(path.c_str());
+                    
 
                 }
             }

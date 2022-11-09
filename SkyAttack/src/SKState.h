@@ -1,8 +1,8 @@
 #pragma once
 #include "../stdafx.h"
+#include "SKInputManager.h"
 
-
-typedef enum {
+typedef enum SKTextureId  {
 	SHIP_12 = 0,
 	SHIP_11 = 1,
 	SHIP_10 = 2,

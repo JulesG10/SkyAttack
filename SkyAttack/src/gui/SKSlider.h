@@ -1,8 +1,9 @@
 #pragma once
 
 #include "../../stdafx.h"
+#include "SKGui.h"
 
-class SKSlider
+class SKSlider : public SKGui
 {
 };
 

@@ -136,6 +136,8 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="src\gui\SKGui.cpp" />
+    <ClCompile Include="src\SKInputManager.cpp" />
     <ClCompile Include="src\gui\SKInput.cpp" />
     <ClCompile Include="src\gui\SKSlider.cpp" />
     <ClCompile Include="src\menu\SKMenuSettings.cpp" />
@@ -150,6 +152,8 @@
     <ClCompile Include="stdafx.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\gui\SKGui.h" />
+    <ClInclude Include="src\SKInputManager.h" />
     <ClInclude Include="src\gui\SKInput.h" />
     <ClInclude Include="src\gui\SKSlider.h" />
     <ClInclude Include="src\menu\SKMenuSettings.h" />

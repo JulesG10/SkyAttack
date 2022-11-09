@@ -1,16 +1,15 @@
 #pragma once
 #include "../../stdafx.h"
-#include "../SKState.h"
+#include "SKGui.h"
 
-class SKButton
+class SKButton : public SKGui
 {
 public:
 	SKButton(SKState* state, std::string text, Rectangle rect, Color fg, Color bg);
 	~SKButton();
 
-	bool UpdateFrame();
+	bool UpdateFrame() override;
 private:
-	SKState* m_state;
 	const int m_fontSize = 20;
 	const int m_borderSize = 2;
 

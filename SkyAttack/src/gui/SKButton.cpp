@@ -1,12 +1,11 @@
 #include "SKButton.h"
 
-SKButton::SKButton(SKState* state, std::string text, Rectangle rect, Color fg, Color bg)
+SKButton::SKButton(SKState* state, std::string text, Rectangle rect, Color fg, Color bg) : SKGui(state)
 {
     this->m_text = text;
     this->m_background = bg;
     this->m_foreground = fg;
     this->m_rect = rect;
-    this->m_state = state;
 
     Vector2 textSize = MeasureTextEx(GetFontDefault(), this->m_text.c_str(), this->m_fontSize, 1);
     this->m_textPosition = {

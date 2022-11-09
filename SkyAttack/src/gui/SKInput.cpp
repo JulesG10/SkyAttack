@@ -1,16 +1,24 @@
 #include "SKInput.h"
 
-SKInput::SKInput(SKState* state, Rectangle rect, Color fg, Color bg, std::string placeholder) : m_rect(rect), m_state(state), m_foreground(fg), m_background(bg), m_placeholder(placeholder)
+SKInput::SKInput(SKState* state, Rectangle rect, Color fg, Color bg, std::string placeholder) : SKGui(state), m_rect(rect), m_foreground(fg), m_background(bg), m_placeholder(placeholder)
 {
     this->m_textPosition = {
-        this->m_rect.x + 5,
+        this->m_rect.x + this->m_baseMargin,
         this->m_rect.y + this->m_fontSize/2.f
     };
+
+    this->m_blinkfocus = 100.f;
+    this->m_textCenter = false;
 }
 
 bool SKInput::UpdateFrame()
 {
     Color borderFg = this->m_foreground;
+    if (this->m_blinkfocus <= -20 || !this->m_focus)
+    {
+        this->m_blinkfocus = 100;
+    }
+
     if (CheckCollisionPointRec(this->m_state->GetMouse(), this->m_rect))
     {
         borderFg.a -= 50;
@@ -27,16 +35,17 @@ bool SKInput::UpdateFrame()
     if (this->m_focus)
     {
         int qwkey = GetKeyPressed();
-        char key = this->ConvertQwerty(qwkey);
+        char key = SKInputManager::Instance()->ConvertQwerty(qwkey);
         
         if (qwkey == SK_AZERTY_BACKSPACE && this->m_text.length() > 0)
         {
             this->m_text.pop_back();
+            this->CenterText();
         }
         else if (qwkey == SK_AZERTY_SHIFT)
         {
             this->m_maj = true;
-        }else if (key && this->Allowed(key))
+        }else if (key && this->Allowed(key) && this->m_text.length() < this->m_maxlength)
         {
             if (this->m_maj)
             {
@@ -48,38 +57,67 @@ bool SKInput::UpdateFrame()
             }
 
             this->m_text += key;
-            Vector2 size = MeasureTextEx(GetFontDefault(), this->m_text.c_str(), this->m_fontSize, 1);
-            if ((size.x + 25) >= this->m_rect.width)
+            int textWidth = MeasureText(this->m_text.c_str(), this->m_fontSize);
+            if ((textWidth + 25) >= this->m_rect.width)
             {
                 this->m_text.pop_back();
             }
+
+            this->CenterText();
         }
+        
+        
+        this->m_blinkfocus -= GetFrameTime() * 100;
     }
 
     DrawRectangle(this->m_rect.x, this->m_rect.y, this->m_rect.width, this->m_rect.height, this->m_background);
     DrawRectangleLinesEx(this->m_rect, m_borderSize, borderFg);
+
+    if (this->m_prefix.length())
+    {
+        DrawText(this->m_prefix.c_str(), this->m_prefixPosition.x, this->m_prefixPosition.y, this->m_fontSize, borderFg);
+    }
+
+    if (this->m_blinkfocus > 0)
+    {
+        borderFg.a -= 50;
+    }
     if (this->m_text.length())
     {
         DrawText(this->m_text.c_str(), this->m_textPosition.x, this->m_textPosition.y, this->m_fontSize, borderFg);
     }
     else {
-        DrawText(this->m_placeholder.c_str(), this->m_textPosition.x, this->m_textPosition.y, this->m_fontSize, { 80, 80, 80, 100 });
+        DrawText(this->m_placeholder.c_str(), this->m_rect.x + this->m_baseMargin, this->m_rect.y + this->m_fontSize/2.f, this->m_fontSize, { 80, 80, 80,  (unsigned char)(borderFg.a-40) });
     }
 
     return this->m_focus;
 }
 
-char SKInput::ConvertQwerty(int key)
+void SKInput::SetLength(int length)
 {
-    for (const std::pair<int, char>& p : this->m_azerty)
-    {
-        if (p.first == key)
-        {
-            return p.second;
-        }
-    }
+    this->m_maxlength = length;
+}
 
-    return key;
+void SKInput::SetPrefix(std::string prefix)
+{
+    this->m_prefix = prefix;
+    this->m_prefixPosition = {
+        this->m_rect.x - (MeasureText(this->m_prefix.c_str(), this->m_fontSize) + this->m_baseMargin),
+        this->m_rect.y + this->m_fontSize / 2.f
+    };
+}
+
+void SKInput::CenterText()
+{
+    if (this->m_textCenter)
+    {
+        this->m_textPosition.x = this->m_rect.x + (this->m_rect.width - MeasureText(this->m_text.c_str(), this->m_fontSize)) / 2.f;
+    }
+}
+
+void SKInput::SetTextCenter(bool center)
+{
+    this->m_textCenter = center;
 }
 
 std::string SKInput::GetText()
