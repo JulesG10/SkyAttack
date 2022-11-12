@@ -1,12 +1,11 @@
 #pragma once
-
-#include "SKState.h"
+#include "../stdafx.h"
 
 #include "menu/SKMenuTransition.h"
 
 #include "menu/SKMenuSettings.h"
-//#include "menu/SKMenuGame.h"
-//#include "menu/SKMenuMods.h"
+#include "menu/SKMenuGame.h"
+#include "menu/SKMenuMods.h"
 
 #include "gui/SKButton.h"
 #include "gui/SKLabel.h"
@@ -20,16 +19,17 @@ public:
 
 	void UpdateFrame();
 private:
-	void DrawHomePage();
+	void DrawFrame();
 
 	SKState* m_state;
-	SKMenuPage m_page;
+	SKMenuPages m_page;
+	SKMenuPages m_nextPage;
 
 	SKMenuTransition* m_transition;
 	
 	SKMenuSettings* m_settings;
-	//SKMenuMods* m_mods;
-	//SKMenuGame* m_game;
+	SKMenuGame* m_game;
+	SKMenuMods* m_mods;
 
 
 	SKInput* m_pseudo;

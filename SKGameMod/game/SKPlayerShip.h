@@ -1,5 +1,5 @@
 #pragma once
-#include "SKState.h"
+#include "../pch.h"
 #include "SKShip.h"
 
 class SKPlayerShip : SKShip

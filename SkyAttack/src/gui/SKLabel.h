@@ -1,5 +1,4 @@
 #pragma once
-#include "../../stdafx.h"
 #include "SKGui.h"
 
 class SKLabel : public SKGui

@@ -6,15 +6,19 @@
 
 #include<iostream>
 #include<string>
-#include<vector>
-#include<map>
+#include<fstream>
 #include<functional>
+
+#include<map>
+#include<vector>
 #include<unordered_map>
 
 #include<raylib.h>
 #include<raymath.h>
 #include<rlgl.h>
 
+#include <pthread.h>
+#include <box2d/box2d.h>
 
 #if defined(_WIN32)           
 #define NOGDI
@@ -28,10 +32,9 @@
 #undef far
 #endif
 
-
-#include <pthread.h>
-#include <box2d/b2_api.h>
-#include <openssl/aes.h>
+#include "../ext/SKState.h"
+#include "../ext/SKEncryption.h"
+#include "../ext/SKInputManager.h"
 
 
 #endif

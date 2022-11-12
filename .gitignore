@@ -2,6 +2,8 @@
 /rres
 /.vs
 /SkyAttack/x64/
-/SkyAttack/ClassDiagram.cd
+/SkyAttack/*.cd
 /SkyAttack/SkyAttack.vcxproj.user
 *.png
+/SKGameMod/x64/
+/SKGameMod/SKGameMod.vcxproj.user

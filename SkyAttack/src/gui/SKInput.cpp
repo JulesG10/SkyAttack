@@ -122,7 +122,11 @@ void SKInput::SetTextCenter(bool center)
 
 std::string SKInput::GetText()
 {
-    return this->m_text;
+    if (this->m_text.length())
+    {
+        return this->m_text;
+    }
+    return "\0";
 }
 
 void SKInput::SetText(std::string text)

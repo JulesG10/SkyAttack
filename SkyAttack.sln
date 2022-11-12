@@ -5,6 +5,22 @@ VisualStudioVersion = 17.3.32929.385
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SkyAttack", "SkyAttack\SkyAttack.vcxproj", "{5081D722-9180-4D7E-8E1F-EA4BB1F879D1}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SKGameMod", "SKGameMod\SKGameMod.vcxproj", "{D135CA27-2AE1-45F9-8D27-2ABEC61DE6E1}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ext", "ext", "{F6A6E7CF-78BE-4ED5-98DC-2409F5CB5101}"
+	ProjectSection(SolutionItems) = preProject
+		ext\aes.c = ext\aes.c
+		ext\aes.h = ext\aes.h
+		ext\SKEncryption.cpp = ext\SKEncryption.cpp
+		ext\SKEncryption.h = ext\SKEncryption.h
+		ext\SKEnums.cpp = ext\SKEnums.cpp
+		ext\SKEnums.h = ext\SKEnums.h
+		ext\SKInputManager.cpp = ext\SKInputManager.cpp
+		ext\SKInputManager.h = ext\SKInputManager.h
+		ext\SKState.cpp = ext\SKState.cpp
+		ext\SKState.h = ext\SKState.h
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -21,6 +37,14 @@ Global
 		{5081D722-9180-4D7E-8E1F-EA4BB1F879D1}.Release|x64.Build.0 = Release|x64
 		{5081D722-9180-4D7E-8E1F-EA4BB1F879D1}.Release|x86.ActiveCfg = Release|Win32
 		{5081D722-9180-4D7E-8E1F-EA4BB1F879D1}.Release|x86.Build.0 = Release|Win32
+		{D135CA27-2AE1-45F9-8D27-2ABEC61DE6E1}.Debug|x64.ActiveCfg = Debug|x64
+		{D135CA27-2AE1-45F9-8D27-2ABEC61DE6E1}.Debug|x64.Build.0 = Debug|x64
+		{D135CA27-2AE1-45F9-8D27-2ABEC61DE6E1}.Debug|x86.ActiveCfg = Debug|Win32
+		{D135CA27-2AE1-45F9-8D27-2ABEC61DE6E1}.Debug|x86.Build.0 = Debug|Win32
+		{D135CA27-2AE1-45F9-8D27-2ABEC61DE6E1}.Release|x64.ActiveCfg = Release|x64
+		{D135CA27-2AE1-45F9-8D27-2ABEC61DE6E1}.Release|x64.Build.0 = Release|x64
+		{D135CA27-2AE1-45F9-8D27-2ABEC61DE6E1}.Release|x86.ActiveCfg = Release|Win32
+		{D135CA27-2AE1-45F9-8D27-2ABEC61DE6E1}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,6 +1,6 @@
 #include "SKButton.h"
 
-SKButton::SKButton(SKState* state, std::string text, Rectangle rect, Color fg, Color bg) : SKGui(state)
+SKButton::SKButton(SKState* state, std::string text, Rectangle rect, Color fg, Color bg) : SKGui(state), m_enable(true)
 {
     this->m_text = text;
     this->m_background = bg;
@@ -22,21 +22,28 @@ bool SKButton::UpdateFrame()
 {
     Color borderFg = this->m_foreground;
     Color back = this->m_background;
-
     bool colide = false;
-    if (CheckCollisionPointRec(this->m_state->GetMouse(), this->m_rect))
-    {
-        borderFg.a -= 50;
-        back.a -= 50;
-        colide = true;
 
-        if (IsMouseButtonDown(MOUSE_BUTTON_LEFT))
-        { 
-            DrawRectangle(this->m_rect.x, this->m_rect.y, this->m_rect.width, this->m_rect.height, back);
-            DrawRectangleLinesEx(this->m_rect, m_borderSize, this->m_foreground);
-            DrawText(this->m_text.c_str(), this->m_textPosition.x, this->m_textPosition.y, this->m_fontSize, this->m_foreground);
+    if (this->m_enable)
+    {
+        if (CheckCollisionPointRec(this->m_state->GetMouse(), this->m_rect))
+        {
+            borderFg.a -= 50;
+            back.a -= 50;
+            colide = true;
+
+            if (IsMouseButtonDown(MOUSE_BUTTON_LEFT))
+            {
+                DrawRectangle(this->m_rect.x, this->m_rect.y, this->m_rect.width, this->m_rect.height, back);
+                DrawRectangleLinesEx(this->m_rect, m_borderSize, this->m_foreground);
+                DrawText(this->m_text.c_str(), this->m_textPosition.x, this->m_textPosition.y, this->m_fontSize, this->m_foreground);
+            }
         }
     }
+    else {
+        borderFg.a = 80;
+    }
+   
 
     DrawRectangle(this->m_rect.x, this->m_rect.y, this->m_rect.width, this->m_rect.height, back);
     DrawRectangleLinesEx(this->m_rect, m_borderSize, borderFg);
@@ -44,4 +51,9 @@ bool SKButton::UpdateFrame()
 
     
     return IsMouseButtonReleased(MOUSE_LEFT_BUTTON) && colide;
+}
+
+void SKButton::SetEnable(bool active)
+{
+    this->m_enable = active;
 }

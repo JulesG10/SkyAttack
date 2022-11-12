@@ -1,13 +1,13 @@
 #pragma once
 #include "../../stdafx.h"
-#include "../SKState.h"
 
 enum SKMenuTransitionMode {
 	FADE_IN,
 	FADE_OUT,
 };
 
-enum SKMenuPage {
+enum SKMenuPages {
+	PAGE_NONE,
 	PAGE_HOME,
 	PAGE_SETTINGS,
 	PAGE_MODS,
@@ -48,7 +48,7 @@ private:
 
 	std::vector<std::pair<Vector2, SKTextureId>> m_ships;
 
-	const float m_speed = 2.5;
+	const float m_speed = 2.8;
 	const float m_scale = 10;
 };
 

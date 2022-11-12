@@ -1,23 +1,18 @@
 #pragma once
 
-#include "../../stdafx.h"
-#include "../SKState.h"
+#include "SKMenuPage.h"
+
 #include "../gui/SKInput.h"
 #include "../gui/SKLabel.h"
 #include "../gui/SKButton.h"
 
-#include "SKMenuTransition.h"
 
-
-
-class SKMenuSettings
+class SKMenuSettings : public SKMenuPage
 {
+public:
+	SKMenuSettings(SKState* state, SKMenuTransition*, SKMenuPages* page);
 private:
-	SKMenuSettings(SKState* state, SKMenuTransition*, SKMenuPage* page);
-
-	friend class SKMenu;
-
-	void UpdateFrame();
+	void DrawFrame() override;
 
 	SKInput* m_left;
 	SKInput* m_right;
@@ -31,12 +26,5 @@ private:
 	SKLabel* m_title;
 	SKLabel* m_shootInfo;
 	SKButton* m_backMenu;
-
-
-	SKMenuPage* m_page;
-	SKState* m_state;
-	SKMenuTransition* m_transition;
-	
-	bool m_changePage;
 };
 

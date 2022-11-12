@@ -1,6 +1,9 @@
 #pragma once
 
-#include "../stdafx.h"
+#include<iostream>
+#include <vector>
+
+#include <raylib.h>
 
 #define SK_AZERTY_BACKSPACE 259
 #define SK_AZERTY_UP 265

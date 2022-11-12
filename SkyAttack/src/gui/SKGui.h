@@ -1,5 +1,6 @@
 #pragma once
-#include "../SKState.h"
+#include "../../stdafx.h"
+
 
 class SKGui
 {

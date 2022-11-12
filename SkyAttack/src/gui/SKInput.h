@@ -1,6 +1,5 @@
 #pragma once
 
-#include "../../stdafx.h"
 #include "SKGui.h"
 
 #define SKInputKey(inp, state, x, y, text) {\

@@ -9,12 +9,12 @@ SKGameCore::~SKGameCore()
 }
 
 int SKGameCore::Start(int argc, char** argv)
+
 {
     if (!this->Init(argc, argv))
     {
         return EXIT_FAILURE;
     }
-
 
     // TODO: init game state
     // create map
@@ -185,13 +185,50 @@ void* LoadResources(void* data)
                 if (SKValidTextureId(textureId))
                 {
                     std::string path(appdir + shortpath + SKTexureIdToString(prefix, textureId) + ".png");
-                    self->m_state->m_images[id] = LoadImage(path.c_str());
                     
+#ifdef _DEBUG
+                    self->m_state->m_images[id] = LoadImage(path.c_str());
+#else
+                    std::string content = SKEncryption::Instance()->DecryptFileContent(path);
+                    self->m_state->m_images[id] = LoadImageFromMemory("PNG", (unsigned char*)content.c_str(), content.size());
+#endif
 
                 }
             }
         }
 
+#ifdef _DEBUG
+        std::string modsdir = std::string(GetApplicationDirectory()) + "mods\\";
+#else
+        std::string modsdir = appdir + "mods\\";
+#endif 
+
+        if (GetFileAttributesA(modsdir.c_str()) == INVALID_FILE_ATTRIBUTES)
+        {
+            CreateDirectoryA(modsdir.c_str(), NULL);
+        }
+
+        WIN32_FIND_DATAA ffd;
+        HANDLE hFind = INVALID_HANDLE_VALUE;
+        ZeroMemory(&ffd, sizeof(WIN32_FIND_DATAA));
+
+        hFind = FindFirstFileA((modsdir+"*").c_str(), &ffd);
+        if (hFind != INVALID_HANDLE_VALUE)
+        {
+            while (FindNextFileA(hFind, &ffd) != 0)
+            {
+                if (!(ffd.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY))
+                {
+                    std::string fname(ffd.cFileName);
+                    size_t ld = fname.find_last_of(".");
+                    if (ld != std::string::npos && fname.substr(ld) == ".dll")
+                    {
+                        self->m_state->m_mods.push_back(modsdir+fname);
+                    }
+                }
+            }
+        }
+        FindClose(hFind);
 
         // TODO: load sounds
 

@@ -13,6 +13,36 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Fichiers sources\ext">
+      <UniqueIdentifier>{c8b63ada-000b-48b4-a311-3f0ab25a7b52}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\gui">
+      <UniqueIdentifier>{9c43e559-8e65-4dcd-a24e-dedf7bdbe662}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\menu">
+      <UniqueIdentifier>{a361c4c3-b06a-4f3d-a48c-05e03ea54b9b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\ext">
+      <UniqueIdentifier>{dcbdce34-a547-4457-bf3d-faf7ae7c407a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\gui">
+      <UniqueIdentifier>{f4ef4bf1-a575-4173-bf5b-886b5152a5bf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\menu">
+      <UniqueIdentifier>{51d684b9-7f8a-4413-97f5-929d61613bed}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\utils">
+      <UniqueIdentifier>{90b86972-4395-43d5-8fb5-307b3bd7e82b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\utils">
+      <UniqueIdentifier>{8934f52b-63fd-48c2-8883-09c131c1dd1d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers d%27en-tête\game">
+      <UniqueIdentifier>{6f39bb60-3836-42c1-8ab0-00af3b760e50}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Fichiers sources\game">
+      <UniqueIdentifier>{8bd62431-18cb-4758-9504-3d130850ca59}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -24,88 +54,121 @@
     <ClCompile Include="src\SKGameCore.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
-    <ClCompile Include="src\SKShip.cpp">
-      <Filter>Fichiers sources</Filter>
+    <ClCompile Include="..\ext\aes.c">
+      <Filter>Fichiers sources\ext</Filter>
     </ClCompile>
-    <ClCompile Include="src\SKPlayerShip.cpp">
-      <Filter>Fichiers sources</Filter>
+    <ClCompile Include="..\ext\SKState.cpp">
+      <Filter>Fichiers sources\ext</Filter>
     </ClCompile>
-    <ClCompile Include="src\SKMenu.cpp">
-      <Filter>Fichiers sources</Filter>
+    <ClCompile Include="..\ext\SKInputManager.cpp">
+      <Filter>Fichiers sources\ext</Filter>
     </ClCompile>
-    <ClCompile Include="src\SKState.cpp">
-      <Filter>Fichiers sources</Filter>
+    <ClCompile Include="..\ext\SKEncryption.cpp">
+      <Filter>Fichiers sources\ext</Filter>
+    </ClCompile>
+    <ClCompile Include="..\ext\SKEnums.cpp">
+      <Filter>Fichiers sources\ext</Filter>
     </ClCompile>
     <ClCompile Include="src\gui\SKButton.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
-    <ClCompile Include="src\gui\SKLabel.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
-    <ClCompile Include="src\menu\SKMenuTransition.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
-    <ClCompile Include="src\menu\SKMenuSettings.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
-    <ClCompile Include="src\gui\SKSlider.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
-    <ClCompile Include="src\gui\SKInput.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
-    <ClCompile Include="src\SKInputManager.cpp">
-      <Filter>Fichiers sources</Filter>
+      <Filter>Fichiers sources\gui</Filter>
     </ClCompile>
     <ClCompile Include="src\gui\SKGui.cpp">
-      <Filter>Fichiers sources</Filter>
+      <Filter>Fichiers sources\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="src\gui\SKInput.cpp">
+      <Filter>Fichiers sources\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="src\gui\SKLabel.cpp">
+      <Filter>Fichiers sources\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="src\gui\SKSlider.cpp">
+      <Filter>Fichiers sources\gui</Filter>
+    </ClCompile>
+    <ClCompile Include="src\menu\SKMenuGame.cpp">
+      <Filter>Fichiers sources\menu</Filter>
+    </ClCompile>
+    <ClCompile Include="src\SKMenu.cpp">
+      <Filter>Fichiers sources\menu</Filter>
+    </ClCompile>
+    <ClCompile Include="src\menu\SKMenuMods.cpp">
+      <Filter>Fichiers sources\menu</Filter>
+    </ClCompile>
+    <ClCompile Include="src\menu\SKMenuPage.cpp">
+      <Filter>Fichiers sources\menu</Filter>
+    </ClCompile>
+    <ClCompile Include="src\menu\SKMenuSettings.cpp">
+      <Filter>Fichiers sources\menu</Filter>
+    </ClCompile>
+    <ClCompile Include="src\menu\SKMenuTransition.cpp">
+      <Filter>Fichiers sources\menu</Filter>
+    </ClCompile>
+    <ClCompile Include="src\SKLib.cpp">
+      <Filter>Fichiers sources\utils</Filter>
+    </ClCompile>
+    <ClCompile Include="src\gui\SKScrollList.cpp">
+      <Filter>Fichiers sources\gui</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\SKGameCore.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
-    <ClInclude Include="src\SKState.h">
-      <Filter>Fichiers d%27en-tête</Filter>
+    <ClInclude Include="..\ext\aes.h">
+      <Filter>Fichiers d%27en-tête\ext</Filter>
     </ClInclude>
-    <ClInclude Include="src\SKShip.h">
-      <Filter>Fichiers d%27en-tête</Filter>
+    <ClInclude Include="..\ext\SKInputManager.h">
+      <Filter>Fichiers d%27en-tête\ext</Filter>
     </ClInclude>
-    <ClInclude Include="src\SKPlayerShip.h">
-      <Filter>Fichiers d%27en-tête</Filter>
+    <ClInclude Include="..\ext\SKEnums.h">
+      <Filter>Fichiers d%27en-tête\ext</Filter>
     </ClInclude>
-    <ClInclude Include="src\SKMenu.h">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
-    <ClInclude Include="src\SKAnimation.h">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
-    <ClInclude Include="src\gui\SKButton.h">
-      <Filter>Fichiers d%27en-tête</Filter>
+    <ClInclude Include="..\ext\SKEncryption.h">
+      <Filter>Fichiers d%27en-tête\ext</Filter>
     </ClInclude>
     <ClInclude Include="src\gui\SKLabel.h">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
-    <ClInclude Include="src\menu\SKMenuTransition.h">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
-    <ClInclude Include="src\menu\SKMenuSettings.h">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
-    <ClInclude Include="src\gui\SKSlider.h">
-      <Filter>Fichiers d%27en-tête</Filter>
+      <Filter>Fichiers d%27en-tête\gui</Filter>
     </ClInclude>
     <ClInclude Include="src\gui\SKInput.h">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
-    <ClInclude Include="src\SKInputManager.h">
-      <Filter>Fichiers d%27en-tête</Filter>
+      <Filter>Fichiers d%27en-tête\gui</Filter>
     </ClInclude>
     <ClInclude Include="src\gui\SKGui.h">
-      <Filter>Fichiers d%27en-tête</Filter>
+      <Filter>Fichiers d%27en-tête\gui</Filter>
     </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="ClassDiagram.cd" />
+    <ClInclude Include="src\gui\SKButton.h">
+      <Filter>Fichiers d%27en-tête\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="src\gui\SKSlider.h">
+      <Filter>Fichiers d%27en-tête\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="src\SKMenu.h">
+      <Filter>Fichiers d%27en-tête\menu</Filter>
+    </ClInclude>
+    <ClInclude Include="src\menu\SKMenuGame.h">
+      <Filter>Fichiers d%27en-tête\menu</Filter>
+    </ClInclude>
+    <ClInclude Include="src\menu\SKMenuMods.h">
+      <Filter>Fichiers d%27en-tête\menu</Filter>
+    </ClInclude>
+    <ClInclude Include="src\menu\SKMenuPage.h">
+      <Filter>Fichiers d%27en-tête\menu</Filter>
+    </ClInclude>
+    <ClInclude Include="src\menu\SKMenuSettings.h">
+      <Filter>Fichiers d%27en-tête\menu</Filter>
+    </ClInclude>
+    <ClInclude Include="src\menu\SKMenuTransition.h">
+      <Filter>Fichiers d%27en-tête\menu</Filter>
+    </ClInclude>
+    <ClInclude Include="..\ext\SKState.h">
+      <Filter>Fichiers d%27en-tête\ext</Filter>
+    </ClInclude>
+    <ClInclude Include="src\SKLib.h">
+      <Filter>Fichiers d%27en-tête\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="src\SKAnimation.h">
+      <Filter>Fichiers d%27en-tête\utils</Filter>
+    </ClInclude>
+    <ClInclude Include="src\gui\SKScrollList.h">
+      <Filter>Fichiers d%27en-tête\gui</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

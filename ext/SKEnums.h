@@ -1,8 +1,11 @@
 #pragma once
-#include "../stdafx.h"
-#include "SKInputManager.h"
+#include <iostream>
+#include <string>
 
-typedef enum SKTextureId  {
+#define SK_TEXTURE_START 0
+#define SK_TEXTURE_END 153
+
+typedef enum SKTextureId {
 	SHIP_12 = 0,
 	SHIP_11 = 1,
 	SHIP_10 = 2,
@@ -34,7 +37,7 @@ typedef enum SKTextureId  {
 	BULLET = 25,
 	BULLET_DOUBLE = 26,
 	BULLET_MIN = 27,
-	
+
 	BULLET_PING = 28,
 
 	BULLET_HIT = 29,
@@ -71,38 +74,17 @@ typedef enum SKTextureId  {
 
 } SKTextureId; // TODO: update textures
 
-#define SK_TEXTURE_START 0
-#define SK_TEXTURE_END 153
+typedef enum SKGameKeys {
+	LEFT,
+	RIGHT,
+	SLOWDOWN,
+	SPEEDUP,
+	SUICIDE,
+	MISSILE,
+	ULTIME
+} SKGameKeys;
 
-
-
-class SKState {
-public:
-	/*static SKState& Instance()
-	{
-		static SKState instance;
-		return instance;
-	}
-	*/
-
-	SKState();
-	~SKState();
-
-
-	//std::vector<Ship*> ships;
-	//std::vector<MapItem*> items;
-	//std::vector<Particle*> particles;
-	//PlayerShip* player;
-
-	Vector2 GetMouse();
-
-	const Vector2 m_renderSize = { 1366, 768 };
-
-	bool m_cpuloading;
-	bool m_loading;
-	std::unordered_map<SKTextureId, Image> m_images = {};
-	std::unordered_map<SKTextureId, Texture2D> m_textures = {};
-} ;
 
 std::string SKTexureIdToString(std::string prefix, SKTextureId id);
 bool SKValidTextureId(SKTextureId id);
+

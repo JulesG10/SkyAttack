@@ -1,5 +1,4 @@
 #pragma once
-#include "../../stdafx.h"
 #include "SKGui.h"
 
 class SKButton : public SKGui
@@ -9,10 +8,13 @@ public:
 	~SKButton();
 
 	bool UpdateFrame() override;
+
+	void SetEnable(bool active);
 private:
 	const int m_fontSize = 20;
 	const int m_borderSize = 2;
 
+	bool m_enable;
 	Vector2 m_textPosition;
 	Rectangle m_rect;
 

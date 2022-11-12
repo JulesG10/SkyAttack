@@ -1,6 +1,6 @@
 #include "SKMenuSettings.h"
 
-SKMenuSettings::SKMenuSettings(SKState* state, SKMenuTransition* transition, SKMenuPage* page) : m_state(state), m_transition(transition), m_page(page)
+SKMenuSettings::SKMenuSettings(SKState* state, SKMenuTransition* transition, SKMenuPages* page) : SKMenuPage(state, transition, page)
 {
 	float topMargin = 220;
 	this->m_title = new SKLabel("Settings", { this->m_state->m_renderSize.x / 2.f, 20 }, 60, WHITE, { 1, 0 });
@@ -17,47 +17,57 @@ SKMenuSettings::SKMenuSettings(SKState* state, SKMenuTransition* transition, SKM
 
 	this->m_shootInfo = new SKLabel("(Shoot with Space or left click)", { this->m_state->m_renderSize.x / 2.f, topMargin + 270 }, 20, WHITE, { 1, 0 });
 	this->m_backMenu = new SKButton(this->m_state, "Save & Back to Menu",
-		SKGui::CenterObject({ 
+		SKGui::CenterObject({
 			0,
 			topMargin + 900,
 			350,
 			40
-			}, this->m_state->m_renderSize, {1, 0}), WHITE, BLANK);
-
-	this->m_changePage = false;
+			}, this->m_state->m_renderSize, { 1, 0 }), WHITE, BLANK);
 }
 
-void SKMenuSettings::UpdateFrame()
+void SKMenuSettings::DrawFrame()
 {
-	DrawRectangle(0, 0, this->m_state->m_renderSize.x, this->m_state->m_renderSize.y, { 150, 210, 50, 255 });
-	if (this->m_transition->GetMode() == SKMenuTransitionMode::FADE_OUT || this->m_changePage)
+	this->m_title->UpdateFrame();
+
+	if (this->m_left->UpdateFrame())
 	{
-		this->m_transition->ShipBackground();
-
-		this->m_title->UpdateFrame();
-
-		this->m_left->UpdateFrame();
-		this->m_right->UpdateFrame();
-
-		this->m_slowdown->UpdateFrame();
-		this->m_speedup->UpdateFrame();
-
-		this->m_suicide->UpdateFrame();
-		this->m_missile->UpdateFrame();
-		this->m_ultime->UpdateFrame();
-
-		this->m_shootInfo->UpdateFrame();
-
-		if (this->m_backMenu->UpdateFrame())
-		{
-			this->m_transition->ResetPage();
-			this->m_changePage = true;
-		}
+		this->m_state->m_gamekeys[SKGameKeys::LEFT] = (int)this->m_left->GetText()[0];
 	}
-	this->m_transition->PageTransition(500);
-	if (this->m_transition->IsWaiting() && this->m_changePage)
+
+	if (this->m_right->UpdateFrame())
 	{
-		this->m_changePage = false;
-		*(this->m_page) = SKMenuPage::PAGE_HOME;
+		this->m_state->m_gamekeys[SKGameKeys::RIGHT] = (int)this->m_right->GetText()[0];
+	}
+
+	if (this->m_slowdown->UpdateFrame())
+	{
+		this->m_state->m_gamekeys[SKGameKeys::SLOWDOWN] = (int)this->m_slowdown->GetText()[0];
+	}
+
+	if (this->m_speedup->UpdateFrame())
+	{
+		this->m_state->m_gamekeys[SKGameKeys::SPEEDUP] = (int)this->m_speedup->GetText()[0];
+	}
+
+	if (this->m_suicide->UpdateFrame())
+	{
+		this->m_state->m_gamekeys[SKGameKeys::SUICIDE] = (int)this->m_suicide->GetText()[0];
+
+	}
+	if (this->m_missile->UpdateFrame())
+	{
+		this->m_state->m_gamekeys[SKGameKeys::MISSILE] = (int)this->m_missile->GetText()[0];
+	}
+	if (this->m_ultime->UpdateFrame())
+	{
+		this->m_state->m_gamekeys[SKGameKeys::ULTIME] = (int)this->m_ultime->GetText()[0];
+	}
+
+	this->m_shootInfo->UpdateFrame();
+
+
+	if (this->m_backMenu->UpdateFrame())
+	{
+		this->ChangePage(SKMenuPages::PAGE_HOME);
 	}
 }
