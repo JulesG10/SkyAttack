@@ -11,6 +11,7 @@ class SKMenuSettings : public SKMenuPage
 {
 public:
 	SKMenuSettings(SKState* state, SKMenuTransition*, SKMenuPages* page);
+	void UpdateFrame() override;
 private:
 	void DrawFrame() override;
 

@@ -23,7 +23,7 @@ void SKScrollList::SetList(std::vector<std::string> list)
 
 std::pair<int, std::string> SKScrollList::GetSelected()
 {
-	return std::make_pair(this->m_selected, this->m_list.at(this->m_selected));
+	return std::make_pair(this->m_selected, this->m_selected != -1 ? this->m_list[this->m_selected] : "");
 }
 
 void SKScrollList::SetEnableSelection(bool active)
@@ -46,6 +46,9 @@ bool SKScrollList::UpdateFrame()
 	}
 
 
+	bool selected = false;
+	bool mouseDown = IsMouseButtonDown(MOUSE_BUTTON_LEFT);
+
 	for (size_t i = this->m_scroll; i < this->m_list.size(); i++)
 	{
 		if (i >= this->m_scroll + this->m_maxItem)
@@ -56,6 +59,22 @@ bool SKScrollList::UpdateFrame()
 		int posIndex = i - this->m_scroll;
 		DrawRectangleRec(this->m_positions[posIndex].first, this->m_background);
 		DrawText(this->m_list[i].c_str(), this->m_positions[posIndex].second.x, this->m_positions[posIndex].second.y, this->m_fontSize, this->m_foreground);
+
+		if (mouseDown && CheckCollisionPointRec(this->m_state->GetMouse(), this->m_positions[posIndex].first))
+		{
+			selected = true;
+			this->m_selected = i;
+		}
+
+		if (this->m_selected == i)
+		{
+			DrawRectangleLinesEx(this->m_positions[posIndex].first, 2, WHITE);
+		}
+	}
+
+	if (mouseDown && !selected)
+	{
+		this->m_selected = -1;
 	}
 
 

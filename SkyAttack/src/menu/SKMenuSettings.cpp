@@ -25,6 +25,13 @@ SKMenuSettings::SKMenuSettings(SKState* state, SKMenuTransition* transition, SKM
 			}, this->m_state->m_renderSize, { 1, 0 }), WHITE, BLANK);
 }
 
+void SKMenuSettings::UpdateFrame()
+{
+	SKMenuPage::UpdateFrame();
+	return;
+}
+
+
 void SKMenuSettings::DrawFrame()
 {
 	this->m_title->UpdateFrame();

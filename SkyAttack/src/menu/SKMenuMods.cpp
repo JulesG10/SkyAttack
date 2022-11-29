@@ -4,6 +4,14 @@ SKMenuMods::SKMenuMods(SKState* state, SKMenuTransition* transition, SKMenuPages
 {
 }
 
+
+void SKMenuMods::UpdateFrame()
+{
+	SKMenuPage::UpdateFrame();
+	return;
+}
+
+
 void SKMenuMods::DrawFrame()
 {
 }

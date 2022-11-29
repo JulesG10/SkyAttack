@@ -9,8 +9,6 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SKGameMod", "SKGameMod\SKGa
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ext", "ext", "{F6A6E7CF-78BE-4ED5-98DC-2409F5CB5101}"
 	ProjectSection(SolutionItems) = preProject
-		ext\aes.c = ext\aes.c
-		ext\aes.h = ext\aes.h
 		ext\SKEncryption.cpp = ext\SKEncryption.cpp
 		ext\SKEncryption.h = ext\SKEncryption.h
 		ext\SKEnums.cpp = ext\SKEnums.cpp

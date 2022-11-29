@@ -20,6 +20,7 @@ int SKGameCore::Start(int argc, char** argv)
     // create map
 
     this->m_state = new SKState();
+    SKEncryption::Instance()->SetKeys("SKYATTACK_GAME_0", "SKYATTACK_GAME_0");
 
     this->m_renderTexture = LoadRenderTexture(this->m_state->m_renderSize.x, this->m_state->m_renderSize.y);
     this->m_menu = new SKMenu(this->m_state);
@@ -185,14 +186,7 @@ void* LoadResources(void* data)
                 if (SKValidTextureId(textureId))
                 {
                     std::string path(appdir + shortpath + SKTexureIdToString(prefix, textureId) + ".png");
-                    
-#ifdef _DEBUG
                     self->m_state->m_images[id] = LoadImage(path.c_str());
-#else
-                    std::string content = SKEncryption::Instance()->DecryptFileContent(path);
-                    self->m_state->m_images[id] = LoadImageFromMemory("PNG", (unsigned char*)content.c_str(), content.size());
-#endif
-
                 }
             }
         }

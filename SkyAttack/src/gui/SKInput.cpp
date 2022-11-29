@@ -9,6 +9,7 @@ SKInput::SKInput(SKState* state, Rectangle rect, Color fg, Color bg, std::string
 
     this->m_blinkfocus = 100.f;
     this->m_textCenter = false;
+    this->m_textWidth = 0;
 }
 
 bool SKInput::UpdateFrame()
@@ -35,17 +36,19 @@ bool SKInput::UpdateFrame()
     if (this->m_focus)
     {
         int qwkey = GetKeyPressed();
-        char key = SKInputManager::Instance()->ConvertQwerty(qwkey);
+        bool keyFound = false;
+        char key = SKInputManager::Instance()->ConvertQwerty(qwkey, &keyFound);
         
         if (qwkey == SK_AZERTY_BACKSPACE && this->m_text.length() > 0)
         {
             this->m_text.pop_back();
+            this->m_textWidth = MeasureText(this->m_text.c_str(), this->m_fontSize);
             this->CenterText();
         }
         else if (qwkey == SK_AZERTY_SHIFT)
         {
             this->m_maj = true;
-        }else if (key && this->Allowed(key) && this->m_text.length() < this->m_maxlength)
+        }else if (key && keyFound && this->Allowed(key) && this->m_text.length() < this->m_maxlength)
         {
             if (this->m_maj)
             {
@@ -62,12 +65,15 @@ bool SKInput::UpdateFrame()
             {
                 this->m_text.pop_back();
             }
+            else {
+                this->m_textWidth = textWidth;
+            }
 
             this->CenterText();
         }
         
         
-        this->m_blinkfocus -= GetFrameTime() * 100;
+        this->m_blinkfocus -= GetFrameTime() * 200;
     }
 
     DrawRectangle(this->m_rect.x, this->m_rect.y, this->m_rect.width, this->m_rect.height, this->m_background);
@@ -77,14 +83,15 @@ bool SKInput::UpdateFrame()
     {
         DrawText(this->m_prefix.c_str(), this->m_prefixPosition.x, this->m_prefixPosition.y, this->m_fontSize, borderFg);
     }
-
-    if (this->m_blinkfocus > 0)
-    {
-        borderFg.a -= 50;
-    }
+    
     if (this->m_text.length())
     {
         DrawText(this->m_text.c_str(), this->m_textPosition.x, this->m_textPosition.y, this->m_fontSize, borderFg);
+
+        if (this->m_focus && this->m_blinkfocus > 0)
+        {
+            DrawRectangle(this->m_textPosition.x + this->m_textWidth + 2, this->m_textPosition.y, 2, this->m_fontSize, WHITE);
+        }
     }
     else {
         DrawText(this->m_placeholder.c_str(), this->m_rect.x + this->m_baseMargin, this->m_rect.y + this->m_fontSize/2.f, this->m_fontSize, { 80, 80, 80,  (unsigned char)(borderFg.a-40) });

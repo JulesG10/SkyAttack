@@ -8,45 +8,80 @@ SKEncryption* SKEncryption::Instance()
 
 std::string SKEncryption::DecryptString(std::string str)
 {
-    uint8_t* buffer = (uint8_t*)str.c_str();
-    AES_ECB_encrypt(&this->m_context, buffer);
-    return std::string((char*)buffer);
+    CkStringBuilder sb;
+    CkBinData bd;
+    bd.AppendEncoded(str.c_str(), "Base64");
+    this->m_crypt.DecryptSb(bd, sb);
+    return std::string(sb.getAsString());
 }
 
 std::string SKEncryption::EncryptString(std::string str)
 {
-    uint8_t* buffer = (uint8_t*)str.c_str();
-    AES_ECB_decrypt(&this->m_context, buffer);
-    return std::string((char*)buffer);
+    CkStringBuilder sb;
+    CkBinData bd;
+    sb.Append(str.c_str());
+    this->m_crypt.EncryptSb(sb, bd);
+
+    CkString out;
+    bd.GetEncoded("Base64", out);
+    return std::string(out);
 }
 
-std::string SKEncryption::DecryptFileContent(std::string file)
+bool SKEncryption::DecryptFileContent(std::string file)
 {
-    std::ifstream ifs(file);
-    if (!ifs.good())
-    {
-        return std::string();
-    }
-    std::string content((std::istreambuf_iterator<char>(ifs)), (std::istreambuf_iterator<char>()));
-    ifs.close();
-    return this->DecryptString(content);
-}
+   
+    CkFileAccess fac;
+    std::string newpath(file + ".tmp");
 
-bool SKEncryption::EncryptFileContent(std::string file, std::string content)
-{
-    std::ofstream  ofs(file);
-    if (!ofs.good())
+    if (!this->m_crypt.CkDecryptFile(file.c_str(), newpath.c_str()))
     {
         return false;
     }
-    ofs << this->EncryptString(content);
-    ofs.close();
+    if (!fac.FileDelete(file.c_str()))
+    {
+        return false;
+    }
+    if (!fac.FileRename(newpath.c_str(), file.c_str()))
+    {
+        return false;
+    }
     return true;
+}
+
+bool SKEncryption::EncryptFileContent(std::string file)
+{
+    CkFileAccess fac;
+    std::string newpath(file + ".tmp");
+    
+    if (!this->m_crypt.CkEncryptFile(file.c_str(), newpath.c_str()))
+    {
+        return false;
+    }
+    if (!fac.FileDelete(file.c_str()))
+    {
+        return false;
+    }
+    if (!fac.FileRename(newpath.c_str(), file.c_str()))
+    {
+        return false;
+    }
+    return true;
+}
+
+void SKEncryption::SetKeys(const char* key, const char* iv)
+{
+    this->m_crypt.SetEncodedKey(key, "ascii");
+    this->m_crypt.SetEncodedIV(iv, "ascii");
 }
 
 SKEncryption::SKEncryption()
 {
-    AES_init_ctx(&this->m_context, this->m_key);
+    this->m_crypt.put_CryptAlgorithm("aes");
+    this->m_crypt.put_CipherMode("cbc");
+    this->m_crypt.put_KeyLength(128);
+
+    this->m_crypt.SetEncodedKey("0000000000000000", "ascii");
+    this->m_crypt.SetEncodedIV("0000000000000000", "ascii");
 }
 
 SKEncryption::~SKEncryption()

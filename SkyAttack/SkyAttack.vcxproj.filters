@@ -54,9 +54,6 @@
     <ClCompile Include="src\SKGameCore.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
-    <ClCompile Include="..\ext\aes.c">
-      <Filter>Fichiers sources\ext</Filter>
-    </ClCompile>
     <ClCompile Include="..\ext\SKState.cpp">
       <Filter>Fichiers sources\ext</Filter>
     </ClCompile>
@@ -108,13 +105,22 @@
     <ClCompile Include="src\gui\SKScrollList.cpp">
       <Filter>Fichiers sources\gui</Filter>
     </ClCompile>
+    <ClCompile Include="src\game\SKPlayerShip.cpp">
+      <Filter>Fichiers sources\game</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\SKShip.cpp">
+      <Filter>Fichiers sources\game</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\SKLobby.cpp">
+      <Filter>Fichiers sources\game</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game\SKMap.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\SKGameCore.h">
       <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
-    <ClInclude Include="..\ext\aes.h">
-      <Filter>Fichiers d%27en-tête\ext</Filter>
     </ClInclude>
     <ClInclude Include="..\ext\SKInputManager.h">
       <Filter>Fichiers d%27en-tête\ext</Filter>
@@ -169,6 +175,18 @@
     </ClInclude>
     <ClInclude Include="src\gui\SKScrollList.h">
       <Filter>Fichiers d%27en-tête\gui</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\SKPlayerShip.h">
+      <Filter>Fichiers d%27en-tête\game</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\SKShip.h">
+      <Filter>Fichiers d%27en-tête\game</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\SKLobby.h">
+      <Filter>Fichiers d%27en-tête\game</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\SKMap.h">
+      <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

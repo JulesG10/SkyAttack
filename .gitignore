@@ -3,7 +3,12 @@
 /.vs
 /SkyAttack/x64/
 /SkyAttack/*.cd
+/SkyAttack/Release/
+/SkyAttack/Debug/
 /SkyAttack/SkyAttack.vcxproj.user
 *.png
 /SKGameMod/x64/
+/SKGameMod/Release/
+/SKGameMod/Debug/
 /SKGameMod/SKGameMod.vcxproj.user
+/third-party

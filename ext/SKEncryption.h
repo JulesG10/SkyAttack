@@ -1,15 +1,13 @@
 #pragma once
 
 #include<iostream>
+#include<vector>
 #include<fstream>
 
-extern "C"
-{
-#define ECB 1
-#define AES128 1
-
-#include "aes.h"
-};
+#include <CkCrypt2.h>
+#include <CkFileAccess.h>
+#include <CkBinData.h>
+#include <CkStringBuilder.h>
 
 class SKEncryption
 {
@@ -19,12 +17,12 @@ public:
 	std::string DecryptString(std::string str);
 	std::string EncryptString(std::string str);
 
-	std::string DecryptFileContent(std::string file);
-	bool EncryptFileContent(std::string file, std::string content);
+	bool DecryptFileContent(std::string file);
+	bool EncryptFileContent(std::string file);
 
+	void SetKeys(const char*,const char*);
 private:
-	AES_ctx m_context;
-	const uint8_t m_key[17] = "SKYATTACK_GAME_0";
+	CkCrypt2 m_crypt;
 
 	SKEncryption();
 	~SKEncryption();

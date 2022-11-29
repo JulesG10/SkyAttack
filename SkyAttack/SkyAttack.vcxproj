@@ -78,12 +78,12 @@
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
-      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);D:\dev\repos\project\SkyAttack\third-party\x86\include\</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>D:\dev\repos\project\SkyAttack\third-party\x86\libs\ChilkatDbg.lib;D:\dev\repos\project\SkyAttack\third-party\x86\libs\ChilkatDbgDll.lib;crypt32.lib;ws2_32.lib;dnsapi.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -96,14 +96,14 @@
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
-      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);D:\dev\repos\project\SkyAttack\third-party\x86\include\</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>D:\dev\repos\project\SkyAttack\third-party\x86\libs\ChilkatRel.lib;D:\dev\repos\project\SkyAttack\third-party\x86\libs\ChilkatRelDll.lib;crypt32.lib;ws2_32.lib;dnsapi.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -114,11 +114,12 @@
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
-      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);D:\dev\repos\project\SkyAttack\third-party\x64\include\</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>D:\dev\repos\project\SkyAttack\third-party\x64\libs\ChilkatDbg_x64.lib;crypt32.lib;ws2_32.lib;dnsapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -131,22 +132,26 @@
       <ConformanceMode>true</ConformanceMode>
       <LanguageStandard>stdcpp17</LanguageStandard>
       <LanguageStandard_C>stdc17</LanguageStandard_C>
-      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);D:\dev\repos\project\SkyAttack\third-party\x64\include\</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>D:\dev\repos\project\SkyAttack\third-party\x64\libs\ChilkatRel_x64.lib;D:\dev\repos\project\SkyAttack\third-party\x64\libs\ChilkatRelDll_x64.lib;crypt32.lib;ws2_32.lib;dnsapi.lib;$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\ext\aes.c" />
     <ClCompile Include="..\ext\SKEncryption.cpp" />
     <ClCompile Include="..\ext\SKEnums.cpp" />
     <ClCompile Include="..\ext\SKInputManager.cpp" />
     <ClCompile Include="..\ext\SKState.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="src\game\SKLobby.cpp" />
+    <ClCompile Include="src\game\SKMap.cpp" />
+    <ClCompile Include="src\game\SKPlayerShip.cpp" />
+    <ClCompile Include="src\game\SKShip.cpp" />
     <ClCompile Include="src\gui\SKScrollList.cpp" />
     <ClCompile Include="src\SKLib.cpp" />
     <ClCompile Include="src\menu\SKMenuMods.cpp" />
@@ -164,11 +169,14 @@
     <ClCompile Include="stdafx.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\ext\aes.h" />
     <ClInclude Include="..\ext\SKEncryption.h" />
     <ClInclude Include="..\ext\SKEnums.h" />
     <ClInclude Include="..\ext\SKInputManager.h" />
     <ClInclude Include="..\ext\SKState.h" />
+    <ClInclude Include="src\game\SKLobby.h" />
+    <ClInclude Include="src\game\SKMap.h" />
+    <ClInclude Include="src\game\SKPlayerShip.h" />
+    <ClInclude Include="src\game\SKShip.h" />
     <ClInclude Include="src\gui\SKScrollList.h" />
     <ClInclude Include="src\SKLib.h" />
     <ClInclude Include="src\menu\SKMenuMods.h" />

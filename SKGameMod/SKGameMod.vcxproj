@@ -147,17 +147,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="..\ext\aes.h" />
-    <ClInclude Include="..\ext\SKEncryption.h" />
     <ClInclude Include="..\ext\SKEnums.h" />
     <ClInclude Include="..\ext\SKInputManager.h" />
     <ClInclude Include="..\ext\SKState.h" />
-    <ClInclude Include="..\SkyAttack\stdafx.h" />
     <ClInclude Include="skmain.h" />
+    <ClInclude Include="stdafx.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\ext\aes.c" />
-    <ClCompile Include="..\ext\SKEncryption.cpp" />
     <ClCompile Include="..\ext\SKEnums.cpp" />
     <ClCompile Include="..\ext\SKInputManager.cpp" />
     <ClCompile Include="..\ext\SKState.cpp" />

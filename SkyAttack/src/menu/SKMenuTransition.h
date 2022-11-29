@@ -48,7 +48,7 @@ private:
 
 	std::vector<std::pair<Vector2, SKTextureId>> m_ships;
 
-	const float m_speed = 2.8;
-	const float m_scale = 10;
+	const float m_speed = 2.8f;
+	const float m_scale = 10.f;
 };
 

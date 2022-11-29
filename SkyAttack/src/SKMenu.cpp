@@ -116,7 +116,6 @@ void SKMenu::UpdateFrame()
 	case SKMenuPages::PAGE_GAME:
 		this->m_game->UpdateFrame();
 		break;
-
 	case SKMenuPages::PAGE_HOME:
 	case SKMenuPages::PAGE_NONE:
 	default:

@@ -24,12 +24,6 @@
     <ClInclude Include="skmain.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
-    <ClInclude Include="..\ext\aes.h">
-      <Filter>Fichiers d%27en-tête\ext</Filter>
-    </ClInclude>
-    <ClInclude Include="..\ext\SKEncryption.h">
-      <Filter>Fichiers d%27en-tête\ext</Filter>
-    </ClInclude>
     <ClInclude Include="..\ext\SKEnums.h">
       <Filter>Fichiers d%27en-tête\ext</Filter>
     </ClInclude>
@@ -39,7 +33,7 @@
     <ClInclude Include="..\ext\SKState.h">
       <Filter>Fichiers d%27en-tête\ext</Filter>
     </ClInclude>
-    <ClInclude Include="..\SkyAttack\stdafx.h">
+    <ClInclude Include="stdafx.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
   </ItemGroup>
@@ -50,9 +44,6 @@
     <ClCompile Include="skmain.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
-    <ClCompile Include="..\ext\aes.c">
-      <Filter>Fichiers sources\ext</Filter>
-    </ClCompile>
     <ClCompile Include="..\ext\SKInputManager.cpp">
       <Filter>Fichiers sources\ext</Filter>
     </ClCompile>
@@ -60,9 +51,6 @@
       <Filter>Fichiers sources\ext</Filter>
     </ClCompile>
     <ClCompile Include="..\ext\SKState.cpp">
-      <Filter>Fichiers sources\ext</Filter>
-    </ClCompile>
-    <ClCompile Include="..\ext\SKEncryption.cpp">
       <Filter>Fichiers sources\ext</Filter>
     </ClCompile>
   </ItemGroup>

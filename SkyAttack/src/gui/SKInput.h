@@ -41,6 +41,7 @@ private:
 	bool m_focus;
 	float m_blinkfocus;
 	bool m_maj;
+	int m_textWidth;
 
 	std::string m_prefix;
 	Vector2 m_prefixPosition;
