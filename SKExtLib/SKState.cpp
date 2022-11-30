@@ -1,3 +1,4 @@
+#include "pch.h"
 #include "SKState.h"
 
 SKState::SKState() : m_loading(true), m_cpuloading(true), m_textures({}), m_images({})

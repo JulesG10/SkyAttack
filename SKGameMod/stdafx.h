@@ -32,8 +32,8 @@
 #undef far
 #endif
 
-#include "../ext/SKState.h"
-#include "../ext/SKInputManager.h"
+#include <SKState.h>
+#include <SKInputManager.h>
 
 
 #endif

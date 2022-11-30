@@ -80,11 +80,18 @@
       <PrecompiledHeaderFile>
       </PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile />
+	    <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);$(SolutionDir)third-party\x86\include\;$(SolutionDir)SKExtLib\</AdditionalIncludeDirectories>
+    
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableUAC>false</EnableUAC>
+	   <AdditionalDependencies>$(CoreLibraryDependencies);$(SolutionDir)SKExtLib\lib\x86\$(Configuration)\SKExtLib.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)SKExtLib\lib\x86\$(Configuration)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+   
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -99,6 +106,10 @@
       <PrecompiledHeaderFile>
       </PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile />
+	    <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);$(SolutionDir)third-party\x86\include\;$(SolutionDir)SKExtLib\</AdditionalIncludeDirectories>
+    
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -106,6 +117,9 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableUAC>false</EnableUAC>
+	    <AdditionalDependencies>$(CoreLibraryDependencies);$(SolutionDir)SKExtLib\lib\x86\$(Configuration)\SKExtLib.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)SKExtLib\lib\x86\$(Configuration)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -118,11 +132,18 @@
       <PrecompiledHeaderFile>
       </PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile />
+	  <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);$(SolutionDir)third-party\x64\include\;$(SolutionDir)SKExtLib\</AdditionalIncludeDirectories>
+   
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableUAC>false</EnableUAC>
+	   <AdditionalDependencies>$(CoreLibraryDependencies);$(SolutionDir)SKExtLib\lib\x64\$(Configuration)\SKExtLib.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)SKExtLib\lib\x64\$(Configuration)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+   
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -137,6 +158,10 @@
       <PrecompiledHeaderFile>
       </PrecompiledHeaderFile>
       <PrecompiledHeaderOutputFile />
+	   <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <AdditionalIncludeDirectories>%(AdditionalIncludeDirectories);$(SolutionDir)third-party\x64\include\;$(SolutionDir)SKExtLib\</AdditionalIncludeDirectories>
+    
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -144,19 +169,16 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableUAC>false</EnableUAC>
+	    <AdditionalDependencies>$(CoreLibraryDependencies);$(SolutionDir)SKExtLib\lib\x64\$(Configuration)\SKExtLib.lib</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)SKExtLib\lib\x64\$(Configuration)\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="..\ext\SKEnums.h" />
-    <ClInclude Include="..\ext\SKInputManager.h" />
-    <ClInclude Include="..\ext\SKState.h" />
     <ClInclude Include="skmain.h" />
     <ClInclude Include="stdafx.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\ext\SKEnums.cpp" />
-    <ClCompile Include="..\ext\SKInputManager.cpp" />
-    <ClCompile Include="..\ext\SKState.cpp" />
     <ClCompile Include="dllmain.cpp" />
     <ClCompile Include="skmain.cpp" />
   </ItemGroup>

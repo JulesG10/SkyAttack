@@ -1,3 +1,4 @@
+#include "pch.h"
 #include "SKEnums.h"
 
 std::string SKTexureIdToString(std::string prefix, SKTextureId id)

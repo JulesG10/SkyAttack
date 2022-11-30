@@ -1,20 +1,13 @@
 #pragma once
-
-#include<iostream>
-#include<vector>
-#include<unordered_map>
-
-#include<raylib.h>
-
+#include "pch.h"
 #include "SKEnums.h"
 
-
-class SKState {
+extern class SKEXT_EXPORTS SKState {
 public:
-	SKState();
-	~SKState();
+	 SKState();
+	  ~SKState();
 
-	Vector2 GetMouse();
+	 Vector2 GetMouse();
 
 	const Vector2 m_renderSize = { 1366, 768 };
 

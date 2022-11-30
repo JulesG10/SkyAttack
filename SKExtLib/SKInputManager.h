@@ -1,9 +1,6 @@
 #pragma once
 
-#include<iostream>
-#include <vector>
-
-#include <raylib.h>
+#include "pch.h"
 
 #define SK_AZERTY_BACKSPACE 259
 #define SK_AZERTY_UP 265
@@ -12,19 +9,19 @@
 #define SK_AZERTY_RIGHT 262
 #define SK_AZERTY_SHIFT 340
 
-class SKInputManager
+extern class SKEXT_EXPORTS SKInputManager
 {
 public:
 	SKInputManager();
 	~SKInputManager();
-	
+
 	static SKInputManager* Instance() {
 		static SKInputManager* m_instance = new SKInputManager();
 		return m_instance;
 	}
-	
+
 	char GetKeyAzerty();
-	char ConvertQwerty(int,bool* = nullptr);
+	char ConvertQwerty(int, bool* = nullptr);
 private:
 	const std::vector<std::pair<int, char>> m_azerty = {
 	{81, 'a'},
@@ -65,4 +62,3 @@ private:
 	{57, '9'},
 	};
 };
-

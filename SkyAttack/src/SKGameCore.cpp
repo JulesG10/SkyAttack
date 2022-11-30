@@ -21,6 +21,8 @@ int SKGameCore::Start(int argc, char** argv)
 
     this->m_state = new SKState();
     SKEncryption::Instance()->SetKeys("SKYATTACK_GAME_0", "SKYATTACK_GAME_0");
+    
+
 
     this->m_renderTexture = LoadRenderTexture(this->m_state->m_renderSize.x, this->m_state->m_renderSize.y);
     this->m_menu = new SKMenu(this->m_state);

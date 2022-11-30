@@ -13,17 +13,11 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Fichiers sources\ext">
-      <UniqueIdentifier>{c8b63ada-000b-48b4-a311-3f0ab25a7b52}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Fichiers sources\gui">
       <UniqueIdentifier>{9c43e559-8e65-4dcd-a24e-dedf7bdbe662}</UniqueIdentifier>
     </Filter>
     <Filter Include="Fichiers sources\menu">
       <UniqueIdentifier>{a361c4c3-b06a-4f3d-a48c-05e03ea54b9b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Fichiers d%27en-tête\ext">
-      <UniqueIdentifier>{dcbdce34-a547-4457-bf3d-faf7ae7c407a}</UniqueIdentifier>
     </Filter>
     <Filter Include="Fichiers d%27en-tête\gui">
       <UniqueIdentifier>{f4ef4bf1-a575-4173-bf5b-886b5152a5bf}</UniqueIdentifier>
@@ -53,18 +47,6 @@
     </ClCompile>
     <ClCompile Include="src\SKGameCore.cpp">
       <Filter>Fichiers sources</Filter>
-    </ClCompile>
-    <ClCompile Include="..\ext\SKState.cpp">
-      <Filter>Fichiers sources\ext</Filter>
-    </ClCompile>
-    <ClCompile Include="..\ext\SKInputManager.cpp">
-      <Filter>Fichiers sources\ext</Filter>
-    </ClCompile>
-    <ClCompile Include="..\ext\SKEncryption.cpp">
-      <Filter>Fichiers sources\ext</Filter>
-    </ClCompile>
-    <ClCompile Include="..\ext\SKEnums.cpp">
-      <Filter>Fichiers sources\ext</Filter>
     </ClCompile>
     <ClCompile Include="src\gui\SKButton.cpp">
       <Filter>Fichiers sources\gui</Filter>
@@ -115,21 +97,12 @@
       <Filter>Fichiers sources\game</Filter>
     </ClCompile>
     <ClCompile Include="src\game\SKMap.cpp">
-      <Filter>Fichiers sources</Filter>
+      <Filter>Fichiers sources\game</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\SKGameCore.h">
       <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
-    <ClInclude Include="..\ext\SKInputManager.h">
-      <Filter>Fichiers d%27en-tête\ext</Filter>
-    </ClInclude>
-    <ClInclude Include="..\ext\SKEnums.h">
-      <Filter>Fichiers d%27en-tête\ext</Filter>
-    </ClInclude>
-    <ClInclude Include="..\ext\SKEncryption.h">
-      <Filter>Fichiers d%27en-tête\ext</Filter>
     </ClInclude>
     <ClInclude Include="src\gui\SKLabel.h">
       <Filter>Fichiers d%27en-tête\gui</Filter>
@@ -164,9 +137,6 @@
     <ClInclude Include="src\menu\SKMenuTransition.h">
       <Filter>Fichiers d%27en-tête\menu</Filter>
     </ClInclude>
-    <ClInclude Include="..\ext\SKState.h">
-      <Filter>Fichiers d%27en-tête\ext</Filter>
-    </ClInclude>
     <ClInclude Include="src\SKLib.h">
       <Filter>Fichiers d%27en-tête\utils</Filter>
     </ClInclude>
@@ -186,7 +156,7 @@
       <Filter>Fichiers d%27en-tête\game</Filter>
     </ClInclude>
     <ClInclude Include="src\game\SKMap.h">
-      <Filter>Fichiers d%27en-tête</Filter>
+      <Filter>Fichiers d%27en-tête\game</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

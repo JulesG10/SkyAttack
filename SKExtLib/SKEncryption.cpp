@@ -1,3 +1,4 @@
+#include "pch.h"
 #include "SKEncryption.h"
 
 SKEncryption* SKEncryption::Instance()

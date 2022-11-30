@@ -40,9 +40,13 @@
 #endif
 
 // SK extensions
-#include "../ext/SKState.h"
-#include "../ext/SKEncryption.h"
-#include "../ext/SKInputManager.h"
+//#include "../ext/SKState.h"
+//#include "../ext/SKEncryption.h"
+//#include "../ext/SKInputManager.h"
+
+#include <SKState.h>
+#include <SKEncryption.h>
+#include <SKInputManager.h>
 
 
 #endif

@@ -12,3 +12,7 @@
 /SKGameMod/Debug/
 /SKGameMod/SKGameMod.vcxproj.user
 /third-party
+/SKExtLib/lib/
+/SKExtLib/x64/
+/SKExtLib/Debug/
+/SKExtLib/Release/
