@@ -3,6 +3,8 @@
 #include "../../stdafx.h"
 
 #include "SKMap.h"
+#include "SKPlayerShip.h"
+
 #include "../gui/SKLabel.h"
 #include "../gui/SKButton.h"
 
@@ -22,6 +24,8 @@ private:
 	SKTextureId m_shipAnimation;
 	Rectangle m_shipSrc;
 	Rectangle m_shipDst;
+
+	SKPlayerShip* m_player;
 
 	bool m_active;
 	SKMap* m_map;

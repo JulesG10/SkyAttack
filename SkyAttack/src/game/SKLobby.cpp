@@ -23,6 +23,8 @@ SKLobby::SKLobby(SKState* state) : m_state(state)
     this->m_shipAnimation = SKTextureId::NID_LAST_SHIP;
     this->m_shipSrc = { 0 };
     this->m_shipDst = { 0 };
+
+    this->m_player = new SKPlayerShip(this->m_state);
 }
 
 SKLobby::~SKLobby()
@@ -101,8 +103,13 @@ void SKLobby::UpdateFrame()
 
         return;
     }
-    
-    this->m_map->UpdateFrame(/* camera view */);
+
+    BeginMode2D(this->m_player->GetCamera());
+
+    this->m_map->UpdateFrame(this->m_player->GetView());
+    this->m_player->UpdateFrame();
+
+    EndMode2D();
 }
 
 bool SKLobby::InLobby()

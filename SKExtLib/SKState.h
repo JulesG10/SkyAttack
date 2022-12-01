@@ -7,7 +7,9 @@ public:
 	 SKState();
 	  ~SKState();
 
-	 Vector2 GetMouse();
+	Vector2 GetMouse();
+	bool SaveGameKeys(std::string);
+	bool LoadGameKeys(std::string);
 
 	const Vector2 m_renderSize = { 1366, 768 };
 

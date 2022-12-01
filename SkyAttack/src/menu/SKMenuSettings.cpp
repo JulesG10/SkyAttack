@@ -7,10 +7,8 @@ SKMenuSettings::SKMenuSettings(SKState* state, SKMenuTransition* transition, SKM
 
 	SKInputKey(this->m_left, this->m_state, 100, topMargin, "Move left");
 	SKInputKey(this->m_right, this->m_state, 100, topMargin + 100, "Move right");
-
 	SKInputKey(this->m_slowdown, this->m_state, 100, topMargin + 200, "Slow down");
 	SKInputKey(this->m_speedup, this->m_state, 100, topMargin + 300, "Accelerate");
-
 	SKInputKey(this->m_suicide, this->m_state, 100, topMargin + 440, "Capacity 1 (Suicide)");
 	SKInputKey(this->m_missile, this->m_state, 100, topMargin + 540, "Capacity 2 (Missile)");
 	SKInputKey(this->m_ultime, this->m_state, 100, topMargin + 640, "Ultime Capacity");
@@ -34,6 +32,20 @@ void SKMenuSettings::UpdateFrame()
 
 void SKMenuSettings::DrawFrame()
 {
+	if (!this->m_setDefaultKey)
+	{
+		
+		PRESET_TEXT(left,LEFT);
+		PRESET_TEXT(right, RIGHT);
+		PRESET_TEXT(slowdown, SLOWDOWN);
+		PRESET_TEXT(speedup, SPEEDUP);
+		PRESET_TEXT(suicide, SUICIDE);
+		PRESET_TEXT(missile, MISSILE);
+		PRESET_TEXT(ultime, ULTIME);
+
+		this->m_setDefaultKey = true;
+	}
+
 	this->m_title->UpdateFrame();
 
 	if (this->m_left->UpdateFrame())

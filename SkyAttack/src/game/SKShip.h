@@ -9,18 +9,21 @@ public:
 	~SKShip();
 
 	virtual void UpdateFrame();
+	virtual Rectangle GetView();
+	virtual Camera2D GetCamera();
 protected:
 	SKState* m_state;
-	
-	Vector2 m_position;
-	Vector2 m_velocity;
-	float m_angle;
+	Camera2D m_camera = { 0 };
 
-	SKTextureId m_textureId;
-	std::string m_textureName;
+	Vector2 m_velocity = { 0 };
+	float m_angle = 0.f;
+
+	SKTextureId m_textureId = SKTextureId::SHIP_1;
 	
-	float m_range;
-	float m_life;
+	float m_shootRange = 0.f;
+	float m_life = 0.f;
+
+	float m_textureScale = 4.f;
 
 	//std::vector<Item> m_items;
 };

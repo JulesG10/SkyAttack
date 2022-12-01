@@ -2,7 +2,7 @@
 #include "../../stdafx.h"
 #include "SKShip.h"
 
-class SKPlayerShip : SKShip
+class SKPlayerShip : public SKShip
 {
 public:
 	SKPlayerShip(SKState*);
@@ -10,6 +10,5 @@ public:
 
 	void UpdateFrame() override;
 private:
-	Camera2D m_camera;
 };
 

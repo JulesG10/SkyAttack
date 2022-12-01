@@ -26,18 +26,22 @@ public:
 
 	SKMenuTransitionMode GetMode();
 	bool IsWaiting();
-private:
-	void AnimateIn();
-	void AnimateOut();
-
-	void Draw();
-
-	void ResetIn();
-	void ResetOut();
 
 	bool InEnd();
 	bool OutEnd();
 
+	void AnimateIn();
+	void AnimateOut();
+	
+	void ResetIn();
+	void ResetOut();
+
+private:
+	
+
+	void Draw();
+
+	
 	void FormatAlpha();
 
 	SKState* m_state;

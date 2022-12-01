@@ -64,19 +64,19 @@ void SKMenu::DrawFrame()
 	{
 		this->m_transition->ShipBackground();
 
-		if (this->m_playButton->UpdateFrame() && this->m_nextPage == SKMenuPages::PAGE_NONE)
+		if (this->m_playButton->UpdateFrame() && this->m_nextPage == SKMenuPages::PAGE_NONE && this->m_transition->OutEnd())
 		{
 			this->m_nextPage = SKMenuPages::PAGE_GAME;
 			this->m_transition->ResetPage();
 		}
 
-		if (this->m_modsButton->UpdateFrame() && this->m_nextPage == SKMenuPages::PAGE_NONE)
+		if (this->m_modsButton->UpdateFrame() && this->m_nextPage == SKMenuPages::PAGE_NONE && this->m_transition->OutEnd())
 		{
 			this->m_nextPage = SKMenuPages::PAGE_MODS;
 			this->m_transition->ResetPage();
 		}
 
-		if (this->m_settingsButton->UpdateFrame() && this->m_nextPage == SKMenuPages::PAGE_NONE)
+		if (this->m_settingsButton->UpdateFrame() && this->m_nextPage == SKMenuPages::PAGE_NONE && this->m_transition->OutEnd())
 		{
 			this->m_nextPage = SKMenuPages::PAGE_SETTINGS;
 			this->m_transition->ResetPage();

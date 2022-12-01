@@ -18,6 +18,7 @@ private:
 	RenderTexture2D m_renderTexture;
 	SKState* m_state;
 	SKMenu* m_menu;
+	std::string m_gameKeyPath;
 
 	friend void* LoadResources(void*);
 };

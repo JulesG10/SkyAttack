@@ -1,9 +1,10 @@
 #pragma once
 #include "../../stdafx.h"
 #include "SKShip.h"
+#include "SKPlayerShip.h"
 
 typedef struct SKMapTile {
-	Vector2 position;
+	Rectangle rect;
 	SKTextureId texture;
 }SKMapTile;
 
@@ -13,16 +14,16 @@ public:
 	SKMap(SKState*);
 	~SKMap();
 
-	void UpdateFrame();
+	void UpdateFrame(Rectangle);
 	void SpawnShip(SKShip*);
 
 	bool IsAvailable();
 
 	void LoadMap(std::string);
-	void MapEditor();
 protected:
 	const Rectangle m_tileSize = { 0,0,16,16 };
 	const float m_tileScale = 4.f;
+	int m_maxTileInView = 0;
 
 	bool m_available;
 	SKState* m_state;
