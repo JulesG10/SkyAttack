@@ -10,7 +10,7 @@ typedef struct SKMapTile {
 class SKMap
 {
 public:
-	SKMap();
+	SKMap(SKState*);
 	~SKMap();
 
 	void UpdateFrame();
@@ -19,10 +19,20 @@ public:
 	bool IsAvailable();
 
 	void LoadMap(std::string);
-	void GenerateMap();
+	void MapEditor();
 protected:
+	const Rectangle m_tileSize = { 0,0,16,16 };
+	const float m_tileScale = 4.f;
+
 	bool m_available;
-	std::vector<SKShip*> ships;
-	std::vector<SKMapTile> tiles;
+	SKState* m_state;
+
+	std::vector<SKShip*>  m_ships;
+	std::vector<SKMapTile> m_tiles;
+	
+	// bullets
+	// items
+	// explosions
+	// etc...
 };
 

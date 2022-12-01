@@ -40,7 +40,7 @@ SKMenu::SKMenu(SKState* state) : m_state(state), m_titlePosition({ 0,0 })
 	this->m_transition = new SKMenuTransition(this->m_state);
 
 	this->m_page = SKMenuPages::PAGE_HOME;
-	this->m_nextPage = SKMenuPages::PAGE_HOME;
+	this->m_nextPage = SKMenuPages::PAGE_NONE;
 
 	this->m_settings = new SKMenuSettings(this->m_state, this->m_transition, &this->m_page);
 	this->m_game = new SKMenuGame(this->m_state, this->m_transition, &this->m_page);
@@ -64,19 +64,19 @@ void SKMenu::DrawFrame()
 	{
 		this->m_transition->ShipBackground();
 
-		if (this->m_playButton->UpdateFrame())
+		if (this->m_playButton->UpdateFrame() && this->m_nextPage == SKMenuPages::PAGE_NONE)
 		{
 			this->m_nextPage = SKMenuPages::PAGE_GAME;
 			this->m_transition->ResetPage();
 		}
 
-		if (this->m_modsButton->UpdateFrame())
+		if (this->m_modsButton->UpdateFrame() && this->m_nextPage == SKMenuPages::PAGE_NONE)
 		{
 			this->m_nextPage = SKMenuPages::PAGE_MODS;
 			this->m_transition->ResetPage();
 		}
 
-		if (this->m_settingsButton->UpdateFrame())
+		if (this->m_settingsButton->UpdateFrame() && this->m_nextPage == SKMenuPages::PAGE_NONE)
 		{
 			this->m_nextPage = SKMenuPages::PAGE_SETTINGS;
 			this->m_transition->ResetPage();
@@ -96,10 +96,10 @@ void SKMenu::DrawFrame()
 	}
 	this->m_transition->PageTransition(1500);
 
-	if (this->m_transition->IsWaiting() && this->m_nextPage != SKMenuPages::PAGE_HOME)
+	if (this->m_transition->IsWaiting() && this->m_nextPage != SKMenuPages::PAGE_NONE)
 	{
 		this->m_page = this->m_nextPage;
-		this->m_nextPage = SKMenuPages::PAGE_HOME;
+		this->m_nextPage = SKMenuPages::PAGE_NONE;
 	}
 }
 

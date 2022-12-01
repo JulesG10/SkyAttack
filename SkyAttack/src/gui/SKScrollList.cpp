@@ -48,7 +48,7 @@ bool SKScrollList::UpdateFrame()
 
 	bool selected = false;
 	bool mouseDown = IsMouseButtonDown(MOUSE_BUTTON_LEFT);
-
+	
 	for (size_t i = this->m_scroll; i < this->m_list.size(); i++)
 	{
 		if (i >= this->m_scroll + this->m_maxItem)
@@ -72,14 +72,19 @@ bool SKScrollList::UpdateFrame()
 		}
 	}
 
-	if (mouseDown && !selected)
+	if (this->m_selected != -1 && mouseDown && !selected)
 	{
+		this->m_clearNextFrame = true;
+	}
+
+	if (IsMouseButtonUp(MOUSE_BUTTON_LEFT) && this->m_clearNextFrame)
+	{
+		this->m_clearNextFrame = false;
 		this->m_selected = -1;
 	}
 
-
 	DrawRectangleLinesEx(this->m_rect, this->m_borderSize, this->m_foreground);
-	return false;
+	return selected;
 }
 
 void SKScrollList::UpdateItems()

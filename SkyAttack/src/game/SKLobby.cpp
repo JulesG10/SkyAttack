@@ -4,7 +4,7 @@ SKLobby::SKLobby(SKState* state) : m_state(state)
 {
     this->m_active = false;
 
-    this->m_map = new SKMap();
+    this->m_map = new SKMap(this->m_state);
     this->m_map->LoadMap("");
     
     this->m_errorMsg = new SKLabel("Something went wrong during the lobby loading\nSearching for a game...",
@@ -97,9 +97,12 @@ void SKLobby::UpdateFrame()
         {
             this->m_active = false;
         }
+
+
         return;
     }
-    // random pvp 
+    
+    this->m_map->UpdateFrame(/* camera view */);
 }
 
 bool SKLobby::InLobby()

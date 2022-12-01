@@ -51,15 +51,8 @@ void SKMenuGame::DrawFrame()
 		return;
 	}
 
-	this->m_serverlist->UpdateFrame();
-	if (this->m_serverlist->GetSelected().first != -1)
-	{
-		this->m_joinSrv->SetEnable(true);
-	}
-	else 
-	{
-		this->m_joinSrv->SetEnable(false);
-	}
+	
+	
 
 	if(this->m_createSrv->UpdateFrame())
 	{
@@ -77,11 +70,22 @@ void SKMenuGame::DrawFrame()
 		this->m_lobby->NewConnection(/* mode, ip */);
 	}
 	
+
 	if (this->m_joinSrv->UpdateFrame())
 	{
 		// TODO: server -> loby -> game , etc...
 		this->m_lobby->NewConnection(/* mode, ip */);
 	}
+
+	this->m_serverlist->UpdateFrame();
+	if (this->m_serverlist->GetSelected().first != -1)
+	{
+		this->m_joinSrv->SetEnable(true);
+	}
+	else {
+		this->m_joinSrv->SetEnable(false);
+	}
+
 
 	if (this->m_backHome->UpdateFrame())
 	{

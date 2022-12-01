@@ -11,8 +11,11 @@ void SKMenuPage::DrawFrame()
 
 void SKMenuPage::ChangePage(SKMenuPages page)
 {
-	this->m_transition->ResetPage();
-	this->m_nextPage = page;
+	if (this->m_nextPage == SKMenuPages::PAGE_NONE)
+	{
+		this->m_transition->ResetPage();
+		this->m_nextPage = page;
+	}
 }
 
 void SKMenuPage::UpdateFrame()

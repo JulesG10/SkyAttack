@@ -25,6 +25,7 @@ private:
 	Vector2 m_itemSize;
 
 	int m_selected;
+	bool m_clearNextFrame;
 	bool m_selection;
 
 	int m_maxItem;

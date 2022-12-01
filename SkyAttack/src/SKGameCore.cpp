@@ -70,7 +70,7 @@ bool SKGameCore::Init(int argc, char** argv)
         std::cerr.clear();
         std::cin.clear();
 
-        SetTraceLogLevel(LOG_WARNING | LOG_ERROR | LOG_FATAL);
+        //SetTraceLogLevel(LOG_WARNING | LOG_ERROR | LOG_FATAL);
     }
 #else
     SetTraceLogLevel(LOG_NONE);
