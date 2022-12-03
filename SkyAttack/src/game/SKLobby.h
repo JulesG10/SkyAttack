@@ -3,6 +3,7 @@
 #include "../../stdafx.h"
 
 #include "SKMap.h"
+#include "SKMapEditor.h"
 #include "SKPlayerShip.h"
 
 #include "../gui/SKLabel.h"
@@ -29,6 +30,7 @@ private:
 
 	bool m_active;
 	SKMap* m_map;
+	SKMapEditor* m_editor;
 	SKState* m_state;
 
 	SKLabel* m_errorMsg;

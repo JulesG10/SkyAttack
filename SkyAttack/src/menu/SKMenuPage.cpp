@@ -4,7 +4,7 @@ SKMenuPage::SKMenuPage(SKState* state, SKMenuTransition* transition, SKMenuPages
 {
 }
 
-void SKMenuPage::DrawFrame()
+void SKMenuPage::UpdatePageFrame()
 {
 
 }
@@ -24,7 +24,7 @@ void SKMenuPage::UpdateFrame()
 	if (this->m_transition->GetMode() == SKMenuTransitionMode::FADE_OUT || this->m_nextPage != SKMenuPages::PAGE_NONE)
 	{
 		this->m_transition->ShipBackground();
-		this->DrawFrame();
+		this->UpdatePageFrame();
 	}
 	this->m_transition->PageTransition(200);
 	if (this->m_transition->IsWaiting() && this->m_nextPage != SKMenuPages::PAGE_NONE)

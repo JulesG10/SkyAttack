@@ -3,7 +3,10 @@
 SKMap::SKMap(SKState* state) : m_state(state)
 {
     this->m_available = false;
-    this->m_maxTileInView = ceil(this->m_state->m_renderSize.x / this->m_tileSize.width) * ceil(this->m_state->m_renderSize.y / this->m_tileSize.height);
+
+    this->m_scaleTileW = this->m_tileSize.width * this->m_tileScale;
+    this->m_scaleTileH = this->m_tileSize.height * this->m_tileScale;
+    this->m_maxTileInView = ceil(this->m_state->m_renderSize.x / this->m_scaleTileW) * ceil(this->m_state->m_renderSize.y / this->m_scaleTileH);
 }
 
 SKMap::~SKMap()
@@ -18,22 +21,30 @@ void SKMap::UpdateFrame(Rectangle view)
     }
 
     int i = 0;
-    for (const SKMapTile& tile : this->m_tiles)
+    for (std::pair<const double, SKTextureId>& tile : this->m_tiles)
     {
         if (i >= this->m_maxTileInView)
         {
             break;
         }
 
-        if (CheckCollisionRecs(view, tile.rect))
+        Vec2 vec = { tile.first };
+        Rectangle rect = {
+            vec.position.x,
+            vec.position.y,
+            this->m_scaleTileW,
+            this->m_scaleTileH
+        };
+        if (CheckCollisionRecs(view, rect))
         {
-            DrawTexturePro(this->m_state->m_textures[tile.texture],
+            DrawTexturePro(this->m_state->m_textures[tile.second],
                 this->m_tileSize,
-                tile.rect,
+                rect,
                 { 0,0 }, 0, WHITE);
             i++;
         }
     }
+
 
     for (SKShip* ship : this->m_ships)
     {
@@ -60,20 +71,22 @@ void SKMap::LoadMap(std::string)
     // TODO
     this->m_available = true;
 
+    /*
     float x = 0;
     float y = 0;
     for (size_t i = (SKTextureId::NID_LAST_SHIP + 1); i < (SKTextureId::NID_LAST_TILE - 1); i++)
     {
         this->m_tiles.push_back({
-            { x , y, this->m_tileSize.width * this->m_tileScale, this->m_tileSize.height * this->m_tileScale },
+            { x , y,  this->m_scaleTileW,  this->m_scaleTileH },
             (SKTextureId)i
         });
 
-        x += this->m_tileSize.width * this->m_tileScale;
-        if ((x + (this->m_tileSize.width * this->m_tileScale)) > this->m_state->m_renderSize.x)
+        x += this->m_scaleTileW;
+        if ((x + this->m_scaleTileW) > this->m_state->m_renderSize.x)
         {
             x = 0;
-            y += this->m_tileSize.height * this->m_tileScale;
+            y += this->m_scaleTileH;
         }
     }
+    */
 }

@@ -51,7 +51,7 @@ SKMenu::~SKMenu()
 {
 }
 
-void SKMenu::DrawFrame()
+void SKMenu::UpdatePageFrame()
 {
 	DrawRectangle(0, 0, this->m_state->m_renderSize.x, this->m_state->m_renderSize.y, { 150, 210, 50, 255 });
 	if (this->m_state->m_loading)
@@ -119,7 +119,7 @@ void SKMenu::UpdateFrame()
 	case SKMenuPages::PAGE_HOME:
 	case SKMenuPages::PAGE_NONE:
 	default:
-		this->DrawFrame();
+		this->UpdatePageFrame();
 		break;
 	}
 }

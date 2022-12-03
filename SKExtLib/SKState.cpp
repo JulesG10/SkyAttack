@@ -20,7 +20,7 @@ Vector2 SKState::GetMouse()
 
 bool SKState::SaveGameKeys(std::string path)
 {
-	std::ofstream file(path);
+	std::ofstream file(path, std::ios::in | std::ios::trunc);
 	if (!file.good())
 	{
 		return false;

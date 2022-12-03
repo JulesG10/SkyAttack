@@ -25,6 +25,7 @@ SKLobby::SKLobby(SKState* state) : m_state(state)
     this->m_shipDst = { 0 };
 
     this->m_player = new SKPlayerShip(this->m_state);
+    this->m_editor = new SKMapEditor(this->m_state);
 }
 
 SKLobby::~SKLobby()
@@ -104,12 +105,14 @@ void SKLobby::UpdateFrame()
         return;
     }
 
-    BeginMode2D(this->m_player->GetCamera());
-
+    /*BeginMode2D(this->m_player->GetCamera());
     this->m_map->UpdateFrame(this->m_player->GetView());
-    this->m_player->UpdateFrame();
-
     EndMode2D();
+
+    this->m_player->UpdateFrame();
+    */
+
+    this->m_editor->UpdateFrame();
 }
 
 bool SKLobby::InLobby()

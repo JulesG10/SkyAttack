@@ -43,7 +43,7 @@ void SKMenuGame::UpdateFrame()
 	return;
 }
 
-void SKMenuGame::DrawFrame()
+void SKMenuGame::UpdatePageFrame()
 {
 	if (this->m_lobby->InLobby())
 	{

@@ -22,6 +22,7 @@ public:
 
 	char GetKeyAzerty();
 	char ConvertQwerty(int, bool* = nullptr);
+	char ConvertAzery(int, bool* = nullptr);
 private:
 	const std::vector<std::pair<int, char>> m_azerty = {
 	{81, 'a'},

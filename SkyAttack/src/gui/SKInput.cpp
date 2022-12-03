@@ -146,6 +146,8 @@ void SKInput::SetText(std::string text)
             this->m_text += text[i];
         }
     }
+
+    this->m_textWidth = MeasureText(this->m_text.c_str(), this->m_fontSize);
 }
 
 bool SKInput::Allowed(char c)

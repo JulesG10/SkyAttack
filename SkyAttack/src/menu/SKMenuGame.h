@@ -12,7 +12,7 @@ public:
 
 	void UpdateFrame() override;
 private:
-	void DrawFrame() override;
+	void UpdatePageFrame() override;
 
 	SKLobby* m_lobby;
 

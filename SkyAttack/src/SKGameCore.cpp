@@ -50,7 +50,8 @@ int SKGameCore::Start(int argc, char** argv)
 
         EndDrawing();
     }
-    this->m_state->SaveGameKeys(this->m_gameKeyPath);
+    
+    std::cout << this->m_state->SaveGameKeys(this->m_gameKeyPath) << std::endl;
 
     this->UnLoadResources();
     delete this->m_menu;

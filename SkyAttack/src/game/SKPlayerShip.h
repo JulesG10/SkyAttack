@@ -10,5 +10,6 @@ public:
 
 	void UpdateFrame() override;
 private:
+	void AdjustAngle();
 };
 

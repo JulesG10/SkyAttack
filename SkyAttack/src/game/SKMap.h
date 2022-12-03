@@ -3,10 +3,11 @@
 #include "SKShip.h"
 #include "SKPlayerShip.h"
 
-typedef struct SKMapTile {
-	Rectangle rect;
-	SKTextureId texture;
-}SKMapTile;
+typedef union Vec2 {
+	double value;
+	Vector2 position;
+}Vec2;
+
 
 class SKMap
 {
@@ -14,23 +15,25 @@ public:
 	SKMap(SKState*);
 	~SKMap();
 
-	void UpdateFrame(Rectangle);
-	void SpawnShip(SKShip*);
+	virtual void UpdateFrame(Rectangle);
+	virtual void LoadMap(std::string);
 
+	void SpawnShip(SKShip*);
 	bool IsAvailable();
 
-	void LoadMap(std::string);
 protected:
 	const Rectangle m_tileSize = { 0,0,16,16 };
 	const float m_tileScale = 4.f;
 	int m_maxTileInView = 0;
+	float m_scaleTileW;
+	float m_scaleTileH;
 
 	bool m_available;
 	SKState* m_state;
 
 	std::vector<SKShip*>  m_ships;
-	std::vector<SKMapTile> m_tiles;
-	
+	std::unordered_map<double, SKTextureId> m_tiles;
+
 	// bullets
 	// items
 	// explosions

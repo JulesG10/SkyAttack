@@ -7,6 +7,6 @@ public:
 	SKMenuMods(SKState* state, SKMenuTransition* transition, SKMenuPages* page);
 	void UpdateFrame() override;
 private:
-	void DrawFrame() override;
+	void UpdatePageFrame() override;
 };
 

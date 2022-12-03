@@ -19,7 +19,7 @@ public:
 
 	void UpdateFrame();
 private:
-	void DrawFrame();
+	void UpdatePageFrame();
 
 	SKState* m_state;
 	SKMenuPages m_page;

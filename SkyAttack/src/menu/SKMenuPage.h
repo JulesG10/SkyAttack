@@ -8,7 +8,7 @@ public:
 	SKMenuPage(SKState* state, SKMenuTransition* transition, SKMenuPages* page);
 	virtual void UpdateFrame() = 0;
 protected:
-	virtual void DrawFrame();
+	virtual void UpdatePageFrame();
 	void ChangePage(SKMenuPages page);
 	SKState* m_state;
 

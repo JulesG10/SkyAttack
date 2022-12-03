@@ -12,6 +12,6 @@ void SKMenuMods::UpdateFrame()
 }
 
 
-void SKMenuMods::DrawFrame()
+void SKMenuMods::UpdatePageFrame()
 {
 }

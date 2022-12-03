@@ -30,7 +30,7 @@ void SKMenuSettings::UpdateFrame()
 }
 
 
-void SKMenuSettings::DrawFrame()
+void SKMenuSettings::UpdatePageFrame()
 {
 	if (!this->m_setDefaultKey)
 	{
@@ -50,36 +50,36 @@ void SKMenuSettings::DrawFrame()
 
 	if (this->m_left->UpdateFrame())
 	{
-		this->m_state->m_gamekeys[SKGameKeys::LEFT] = (int)this->m_left->GetText()[0];
+		this->m_state->m_gamekeys[SKGameKeys::LEFT] =  SKInputManager::Instance()->ConvertAzery(this->m_left->GetText()[0]);
 	}
 
 	if (this->m_right->UpdateFrame())
 	{
-		this->m_state->m_gamekeys[SKGameKeys::RIGHT] = (int)this->m_right->GetText()[0];
+		this->m_state->m_gamekeys[SKGameKeys::RIGHT] = SKInputManager::Instance()->ConvertAzery(this->m_right->GetText()[0]);
 	}
 
 	if (this->m_slowdown->UpdateFrame())
 	{
-		this->m_state->m_gamekeys[SKGameKeys::SLOWDOWN] = (int)this->m_slowdown->GetText()[0];
+		this->m_state->m_gamekeys[SKGameKeys::SLOWDOWN] = SKInputManager::Instance()->ConvertAzery(this->m_slowdown->GetText()[0]);
 	}
 
 	if (this->m_speedup->UpdateFrame())
 	{
-		this->m_state->m_gamekeys[SKGameKeys::SPEEDUP] = (int)this->m_speedup->GetText()[0];
+		this->m_state->m_gamekeys[SKGameKeys::SPEEDUP] = SKInputManager::Instance()->ConvertAzery(this->m_speedup->GetText()[0]);
 	}
 
 	if (this->m_suicide->UpdateFrame())
 	{
-		this->m_state->m_gamekeys[SKGameKeys::SUICIDE] = (int)this->m_suicide->GetText()[0];
+		this->m_state->m_gamekeys[SKGameKeys::SUICIDE] = SKInputManager::Instance()->ConvertAzery(this->m_suicide->GetText()[0]);
 
 	}
 	if (this->m_missile->UpdateFrame())
 	{
-		this->m_state->m_gamekeys[SKGameKeys::MISSILE] = (int)this->m_missile->GetText()[0];
+		this->m_state->m_gamekeys[SKGameKeys::MISSILE] = SKInputManager::Instance()->ConvertAzery(this->m_missile->GetText()[0]);
 	}
 	if (this->m_ultime->UpdateFrame())
 	{
-		this->m_state->m_gamekeys[SKGameKeys::ULTIME] = (int)this->m_ultime->GetText()[0];
+		this->m_state->m_gamekeys[SKGameKeys::ULTIME] = SKInputManager::Instance()->ConvertAzery(this->m_ultime->GetText()[0]);
 	}
 
 	this->m_shootInfo->UpdateFrame();
