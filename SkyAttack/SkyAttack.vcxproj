@@ -160,6 +160,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="src\menu\SKMenuMap.cpp" />
     <ClCompile Include="src\game\SKMapEditor.cpp" />
     <ClCompile Include="src\game\SKLobby.cpp" />
     <ClCompile Include="src\game\SKMap.cpp" />
@@ -182,6 +183,7 @@
     <ClCompile Include="stdafx.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\menu\SKMenuMap.h" />
     <ClInclude Include="src\game\SKMapEditor.h" />
     <ClInclude Include="src\game\SKLobby.h" />
     <ClInclude Include="src\game\SKMap.h" />

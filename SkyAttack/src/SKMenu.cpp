@@ -8,21 +8,21 @@ SKMenu::SKMenu(SKState* state) : m_state(state), m_titlePosition({ 0,0 })
 	Vector2 textSize = MeasureTextEx(GetFontDefault(), this->m_loadText.c_str(), this->m_textSize, 1);
 	this->m_textPosition = { (this->m_state->m_renderSize.x - textSize.x) / 2.f, (this->m_state->m_renderSize.y - textSize.y) / 2.f };
 
-	this->m_pseudo = new SKInput(this->m_state, {
+	this->m_pseudo = SK_NEW SKInput(this->m_state, {
 			(this->m_state->m_renderSize.x - 200) / 2,
 			(this->m_state->m_renderSize.y - 150) / 2,
 			200,
 			40
 		}, WHITE, BLANK, "Pseudo...");
 
-	this->m_playButton = new SKButton(this->m_state, "Play Multi", {
+	this->m_playButton = SK_NEW SKButton(this->m_state, "Play Multi", {
 		(this->m_state->m_renderSize.x - 200) / 2,
 		(this->m_state->m_renderSize.y - 50) / 2,
 		200,
 		40
 		}, WHITE, BLANK);
 
-	this->m_modsButton = new SKButton(this->m_state, "Mods", {
+	this->m_modsButton = SK_NEW SKButton(this->m_state, "Mods", {
 		(this->m_state->m_renderSize.x - 200) / 2,
 		(this->m_state->m_renderSize.y + 50) / 2,
 		200,
@@ -30,25 +30,46 @@ SKMenu::SKMenu(SKState* state) : m_state(state), m_titlePosition({ 0,0 })
 		}, WHITE, BLANK);
 	this->m_modsButton->SetEnable(false);
 
-	this->m_settingsButton = new SKButton(this->m_state, "Settings", {
+	this->m_settingsButton = SK_NEW SKButton(this->m_state, "Settings", {
 		(this->m_state->m_renderSize.x - 200) / 2,
 		(this->m_state->m_renderSize.y + 150) / 2,
 		200,
 		40
 		}, WHITE, BLANK);
 
-	this->m_transition = new SKMenuTransition(this->m_state);
+	this->m_mapButton = SK_NEW SKButton(this->m_state, "Map Editor", {
+		(this->m_state->m_renderSize.x - 200) / 2,
+		(this->m_state->m_renderSize.y + 250) / 2,
+		200,
+		40
+		}, WHITE, BLANK);
+
+	this->m_transition = SK_NEW SKMenuTransition(this->m_state);
 
 	this->m_page = SKMenuPages::PAGE_HOME;
 	this->m_nextPage = SKMenuPages::PAGE_NONE;
 
-	this->m_settings = new SKMenuSettings(this->m_state, this->m_transition, &this->m_page);
-	this->m_game = new SKMenuGame(this->m_state, this->m_transition, &this->m_page);
-	this->m_mods = new SKMenuMods(this->m_state, this->m_transition, &this->m_page);
+	this->m_settings = SK_NEW SKMenuSettings(this->m_state, this->m_transition, &this->m_page);
+	this->m_game = SK_NEW SKMenuGame(this->m_state, this->m_transition, &this->m_page);
+	this->m_mods = SK_NEW SKMenuMods(this->m_state, this->m_transition, &this->m_page);
+	this->m_maps = SK_NEW SKMenuMap(this->m_state, this->m_transition, &this->m_page);
 }
 
 SKMenu::~SKMenu()
 {
+	delete this->m_settings;
+	delete this->m_game;
+	delete this->m_mods;
+	delete this->m_maps;
+	
+	delete this->m_transition;
+	
+	delete this->m_settingsButton;
+	delete this->m_mapButton;
+	delete this->m_modsButton;
+	delete this->m_playButton;
+
+	delete this->m_pseudo;
 }
 
 void SKMenu::UpdatePageFrame()
@@ -79,6 +100,13 @@ void SKMenu::UpdatePageFrame()
 		if (this->m_settingsButton->UpdateFrame() && this->m_nextPage == SKMenuPages::PAGE_NONE && this->m_transition->OutEnd())
 		{
 			this->m_nextPage = SKMenuPages::PAGE_SETTINGS;
+			this->m_transition->ResetPage();
+		}
+
+		
+		if (this->m_mapButton->UpdateFrame() && this->m_nextPage == SKMenuPages::PAGE_NONE && this->m_transition->OutEnd())
+		{
+			this->m_nextPage = SKMenuPages::PAGE_MAPS;
 			this->m_transition->ResetPage();
 		}
 
@@ -115,6 +143,9 @@ void SKMenu::UpdateFrame()
 		break;
 	case SKMenuPages::PAGE_GAME:
 		this->m_game->UpdateFrame();
+		break;
+	case SKMenuPages::PAGE_MAPS:
+		this->m_maps->UpdateFrame();
 		break;
 	case SKMenuPages::PAGE_HOME:
 	case SKMenuPages::PAGE_NONE:

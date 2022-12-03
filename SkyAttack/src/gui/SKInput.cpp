@@ -10,6 +10,7 @@ SKInput::SKInput(SKState* state, Rectangle rect, Color fg, Color bg, std::string
     this->m_blinkfocus = 100.f;
     this->m_textCenter = false;
     this->m_textWidth = 0;
+    this->m_focus = false;
 }
 
 bool SKInput::UpdateFrame()

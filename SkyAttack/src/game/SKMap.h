@@ -17,6 +17,7 @@ public:
 
 	virtual void UpdateFrame(Rectangle);
 	virtual void LoadMap(std::string);
+	virtual bool ExportMap(std::string);
 
 	void SpawnShip(SKShip*);
 	bool IsAvailable();

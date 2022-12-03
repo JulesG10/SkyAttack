@@ -11,7 +11,8 @@ enum SKMenuPages {
 	PAGE_HOME,
 	PAGE_SETTINGS,
 	PAGE_MODS,
-	PAGE_GAME
+	PAGE_GAME,
+	PAGE_MAPS
 };
 
 class SKMenuTransition

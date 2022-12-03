@@ -2,7 +2,7 @@
 
 SKMenuGame::SKMenuGame(SKState* state, SKMenuTransition* transition, SKMenuPages* page) : SKMenuPage(state, transition, page)
 {
-	this->m_serverlist = new SKScrollList(state,
+	this->m_serverlist = SK_NEW SKScrollList(state,
 		SKGui::CenterObject({ 0, 200, 400, 500 }, state->m_renderSize, { 1, 0 }),
 		WHITE, { 0,0,0,100 });
 	this->m_serverlist->SetList({
@@ -12,21 +12,32 @@ SKMenuGame::SKMenuGame(SKState* state, SKMenuTransition* transition, SKMenuPages
 		"!! Official Server !!",
 		});
 
-	this->m_lobby = new SKLobby(this->m_state);
+	this->m_lobby = SK_NEW SKLobby(this->m_state);
 
-	this->m_backHome = new SKButton(state, "Go Back",
+	this->m_backHome = SK_NEW SKButton(state, "Go Back",
 		SKGui::CenterObject({ 0, 500, 200, 40 }, state->m_renderSize, { 1, 1 }),
 		WHITE, BLANK);
 
 
-	this->m_joinSrv = new SKButton(state, "Join",
+	this->m_joinSrv = SK_NEW SKButton(state, "Join",
 		SKGui::CenterObject({ -300, 80, 100, 40 }, state->m_renderSize, { 1, 0 }),
 		WHITE, BLANK);
 	this->m_joinSrv->SetEnable(false);
 
-	this->m_createSrv = new SKButton(state, "Create New",
+	this->m_createSrv = SK_NEW SKButton(state, "Create New",
 		SKGui::CenterObject({ 200, 80, 200, 40 }, state->m_renderSize, { 1, 0 }),
 		WHITE, BLANK);
+}
+
+SKMenuGame::~SKMenuGame()
+{
+
+	delete this->m_lobby;
+
+	delete this->m_serverlist;
+	delete this->m_createSrv;
+	delete this->m_joinSrv;
+	delete this->m_backHome;
 }
 
 

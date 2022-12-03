@@ -13,7 +13,7 @@ public:
 private:
 	bool Init(int argc, char** argv);
 	void UploadTextures();
-	void UnLoadResources();
+	void UnloadResources();
 	
 	RenderTexture2D m_renderTexture;
 	SKState* m_state;

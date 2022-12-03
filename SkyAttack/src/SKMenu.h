@@ -6,6 +6,7 @@
 #include "menu/SKMenuSettings.h"
 #include "menu/SKMenuGame.h"
 #include "menu/SKMenuMods.h"
+#include "menu/SKMenuMap.h"
 
 #include "gui/SKButton.h"
 #include "gui/SKLabel.h"
@@ -30,12 +31,14 @@ private:
 	SKMenuSettings* m_settings;
 	SKMenuGame* m_game;
 	SKMenuMods* m_mods;
+	SKMenuMap* m_maps;
 
 
 	SKInput* m_pseudo;
 	SKButton* m_playButton;
 	SKButton* m_settingsButton;
 	SKButton* m_modsButton;
+	SKButton* m_mapButton;
 	
 	Vector2 m_titlePosition;
 	const float m_titleScale = 5;

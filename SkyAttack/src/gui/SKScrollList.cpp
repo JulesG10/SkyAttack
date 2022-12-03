@@ -9,6 +9,7 @@ SKScrollList::SKScrollList(SKState* state, Rectangle rect, Color fg, Color bg) :
 	};
 	this->m_scroll = 0;
 	this->m_maxItem = (int)(rect.height / this->m_itemSize.y);
+	this->m_clearNextFrame = false;
 }
 
 SKScrollList::~SKScrollList()
@@ -17,6 +18,7 @@ SKScrollList::~SKScrollList()
 
 void SKScrollList::SetList(std::vector<std::string> list)
 {
+	this->m_list.clear();
 	this->m_list = list;
 	this->UpdateItems();
 }

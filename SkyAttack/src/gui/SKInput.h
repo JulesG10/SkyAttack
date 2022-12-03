@@ -3,7 +3,7 @@
 #include "SKGui.h"
 
 #define SKInputKey(inp, state, x, y, text) {\
-	inp = new SKInput(state, SKGui::CenterObject({ x, y, 40, 40 }, state->m_renderSize, { 1, 0 }), WHITE, BLANK, "..."); \
+	inp = SK_NEW SKInput(state, SKGui::CenterObject({ x, y, 40, 40 }, state->m_renderSize, { 1, 0 }), WHITE, BLANK, "..."); \
 	inp->SetLength(1); \
 	inp->SetPrefix(text); \
 	inp->SetTextCenter(true); \

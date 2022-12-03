@@ -30,7 +30,6 @@ private:
 
 	bool m_active;
 	SKMap* m_map;
-	SKMapEditor* m_editor;
 	SKState* m_state;
 
 	SKLabel* m_errorMsg;

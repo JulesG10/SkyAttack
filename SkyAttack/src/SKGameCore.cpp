@@ -2,10 +2,14 @@
 
 SKGameCore::SKGameCore() : m_state()
 {
+    this->m_state = SK_NEW SKState();
+    SKEncryption::Instance()->SetKeys("SKYATTACK_GAME_0", "SKYATTACK_GAME_0");
 }
 
 SKGameCore::~SKGameCore()
 {
+    delete this->m_menu;
+    delete this->m_state;
 }
 
 int SKGameCore::Start(int argc, char** argv)
@@ -15,23 +19,20 @@ int SKGameCore::Start(int argc, char** argv)
     {
         return EXIT_FAILURE;
     }
-
+    
+    this->m_menu = SK_NEW SKMenu(this->m_state);
 
     this->m_gameKeyPath = std::string(GetApplicationDirectory()) + "keymap.sk";
-    this->m_state = new SKState();
     if (!this->m_state->LoadGameKeys(this->m_gameKeyPath))
     {
         DeleteFileA(this->m_gameKeyPath.c_str());
     }
-    
-    SKEncryption::Instance()->SetKeys("SKYATTACK_GAME_0", "SKYATTACK_GAME_0");
-    
+     
     this->m_renderTexture = LoadRenderTexture(this->m_state->m_renderSize.x, this->m_state->m_renderSize.y);
-    this->m_menu = new SKMenu(this->m_state);
-
+   
     pthread_t resThread;
     pthread_create(&resThread, NULL, &LoadResources, this);
-
+    
     while (!WindowShouldClose())
     {
         this->UploadTextures();
@@ -51,11 +52,9 @@ int SKGameCore::Start(int argc, char** argv)
         EndDrawing();
     }
     
-    std::cout << this->m_state->SaveGameKeys(this->m_gameKeyPath) << std::endl;
-
-    this->UnLoadResources();
-    delete this->m_menu;
-    delete this->m_state;
+    this->m_state->SaveGameKeys(this->m_gameKeyPath);
+    this->UnloadResources();
+    
     CloseWindow();
 
     return EXIT_SUCCESS;
@@ -138,7 +137,7 @@ void SKGameCore::UploadTextures()
     }
 }
 
-void SKGameCore::UnLoadResources()
+void SKGameCore::UnloadResources()
 {
     UnloadRenderTexture(this->m_renderTexture);
     for (size_t i = SK_TEXTURE_START; i <= SK_TEXTURE_END; i++)
@@ -229,6 +228,7 @@ void* LoadResources(void* data)
                 }
             }
         }
+        
         FindClose(hFind);
 
         // TODO: load sounds

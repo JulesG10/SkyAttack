@@ -3,7 +3,7 @@
 SKMenuSettings::SKMenuSettings(SKState* state, SKMenuTransition* transition, SKMenuPages* page) : SKMenuPage(state, transition, page)
 {
 	float topMargin = 220;
-	this->m_title = new SKLabel("Settings", { this->m_state->m_renderSize.x / 2.f, 20 }, 60, WHITE, { 1, 0 });
+	this->m_title = SK_NEW SKLabel("Settings", { this->m_state->m_renderSize.x / 2.f, 20 }, 60, WHITE, { 1, 0 });
 
 	SKInputKey(this->m_left, this->m_state, 100, topMargin, "Move left");
 	SKInputKey(this->m_right, this->m_state, 100, topMargin + 100, "Move right");
@@ -13,14 +13,30 @@ SKMenuSettings::SKMenuSettings(SKState* state, SKMenuTransition* transition, SKM
 	SKInputKey(this->m_missile, this->m_state, 100, topMargin + 540, "Capacity 2 (Missile)");
 	SKInputKey(this->m_ultime, this->m_state, 100, topMargin + 640, "Ultime Capacity");
 
-	this->m_shootInfo = new SKLabel("(Shoot with Space or left click)", { this->m_state->m_renderSize.x / 2.f, topMargin + 270 }, 20, WHITE, { 1, 0 });
-	this->m_backMenu = new SKButton(this->m_state, "Save & Back to Menu",
+	this->m_shootInfo = SK_NEW SKLabel("(Shoot with Space or left click)", { this->m_state->m_renderSize.x / 2.f, topMargin + 270 }, 20, WHITE, { 1, 0 });
+	this->m_backMenu = SK_NEW SKButton(this->m_state, "Save & Back to Menu",
 		SKGui::CenterObject({
 			0,
 			topMargin + 900,
 			350,
 			40
 			}, this->m_state->m_renderSize, { 1, 0 }), WHITE, BLANK);
+}
+
+SKMenuSettings::~SKMenuSettings()
+{
+	delete this->m_left;
+	delete this->m_right;
+
+	delete this->m_slowdown;
+	delete this->m_speedup;
+	delete this->m_suicide;
+	delete this->m_missile;
+	delete this->m_ultime;
+
+	delete this->m_title;
+	delete 	this->m_shootInfo;
+	delete 	this->m_backMenu;
 }
 
 void SKMenuSettings::UpdateFrame()

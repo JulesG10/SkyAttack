@@ -4,14 +4,14 @@ SKLobby::SKLobby(SKState* state) : m_state(state)
 {
     this->m_active = false;
 
-    this->m_map = new SKMap(this->m_state);
+    this->m_map = SK_NEW SKMap(this->m_state);
     this->m_map->LoadMap("");
     
-    this->m_errorMsg = new SKLabel("Something went wrong during the lobby loading\nSearching for a game...",
+    this->m_errorMsg = SK_NEW SKLabel("Something went wrong during the lobby loading\nSearching for a game...",
         { this->m_state->m_renderSize.x / 2.f, this->m_state->m_renderSize.y / 2.f - 50.f },
         20, WHITE);
 
-    this->m_quit = new SKButton(this->m_state, "Quit Lobby",
+    this->m_quit = SK_NEW SKButton(this->m_state, "Quit Lobby",
         SKGui::CenterObject({
             0,
             50,
@@ -24,12 +24,15 @@ SKLobby::SKLobby(SKState* state) : m_state(state)
     this->m_shipSrc = { 0 };
     this->m_shipDst = { 0 };
 
-    this->m_player = new SKPlayerShip(this->m_state);
-    this->m_editor = new SKMapEditor(this->m_state);
+    this->m_player = SK_NEW SKPlayerShip(this->m_state);
 }
 
 SKLobby::~SKLobby()
 {
+    delete this->m_quit;
+    delete this->m_map;
+    delete this->m_player;
+    delete this->m_errorMsg;
 }
 
 void SKLobby::NewConnection()
@@ -67,8 +70,8 @@ void SKLobby::UpdateFrame()
         }
         
         DrawCircle(
-            this->m_shipDst.x, this->m_shipDst.y,
-            // (max(this->m_shipDst.width, this->m_shipDst.height)* 1.5f)/2.f,
+            this->m_shipDst.x,
+            this->m_shipDst.y,
             (this->m_shipDst.width * 1.5)/2.f,
             { 100, 100, 100, 100 });
 
@@ -112,7 +115,7 @@ void SKLobby::UpdateFrame()
     this->m_player->UpdateFrame();
     */
 
-    this->m_editor->UpdateFrame();
+   
 }
 
 bool SKLobby::InLobby()

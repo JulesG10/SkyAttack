@@ -9,7 +9,7 @@
 class SKMenuGame : public SKMenuPage {
 public:
 	SKMenuGame(SKState* state, SKMenuTransition* transition, SKMenuPages* page);
-
+	~SKMenuGame();
 	void UpdateFrame() override;
 private:
 	void UpdatePageFrame() override;

@@ -10,8 +10,13 @@ public:
 	~SKMapEditor();
 
 	void UpdateFrame(Rectangle rect = {0}) override;
-	void LoadMap(std::string) override;
-	bool ExportMap(std::string);
+
+	void SetAvailable(bool);
+	bool HasQuit();
+
+	void Clear();
+
+	std::string GetMapDir();
 private:
 	bool DrawTileSelector(Vector2 mouse);
 
@@ -22,6 +27,7 @@ private:
 
 	Camera2D m_camera;
 	Vector2 m_position;
+	bool m_quit;
 	int m_tilePerRow;
 	int m_tileSelectorWidth;
 	Rectangle m_view;

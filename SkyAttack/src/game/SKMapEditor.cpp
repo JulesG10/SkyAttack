@@ -19,16 +19,18 @@ SKMapEditor::SKMapEditor(SKState* state) : SKMap(state)
 	this->m_selected = SKTextureId::NONE;
 	this->m_tileSelectorWidth = 250;
 
-	this->m_save = new SKButton(this->m_state, "Save & Quit", { 25, this->m_state->m_renderSize.y - 50, 200, 40 }, WHITE, BLANK);
+	this->m_save = SK_NEW SKButton(this->m_state, "Save & Quit", { 25, this->m_state->m_renderSize.y - 50, 200, 40 }, WHITE, BLANK);
 	this->m_mapdir = std::string(GetApplicationDirectory()) + "map";
 }
 
 SKMapEditor::~SKMapEditor()
 {
+	delete this->m_save;
 }
 
 void SKMapEditor::UpdateFrame(Rectangle)
 {
+	DrawRectangle(0, 0, this->m_state->m_renderSize.x, this->m_state->m_renderSize.y, { 30,30,30,255 });
 	float speed = 600.f;
 
 	if (IsKeyDown(this->m_state->m_gamekeys[SKGameKeys::LEFT]))
@@ -112,6 +114,8 @@ void SKMapEditor::UpdateFrame(Rectangle)
 		}
 
 		this->ExportMap(this->m_mapdir + "\\map_" + std::to_string(ms.count()) + ".sk");
+		this->m_quit = true;
+		this->m_available = false;
 	}
 }
 
@@ -196,31 +200,26 @@ bool SKMapEditor::DrawTileSelector(Vector2 mouse)
 	return hover;
 }
 
-void SKMapEditor::LoadMap(std::string)
+void SKMapEditor::SetAvailable(bool val)
 {
-	return;
+	this->m_available = val;
 }
 
-bool SKMapEditor::ExportMap(std::string path)
+bool SKMapEditor::HasQuit()
 {
-	if (!this->m_tiles.size())
-	{
-		return false;
-	}
+	return this->m_quit;
+}
 
-	std::ofstream file(path, std::ios::in | std::ios::trunc);
-	if (!file.good())
-	{
-		return false;
-	}
+void SKMapEditor::Clear()
+{
+	this->m_tiles.clear();
+	this->m_position = { 0,0 };
+	this->m_camera.target = { 0,0 };
+}
 
-	for (const std::pair<const double, SKTextureId>& item : this->m_tiles)
-	{
-		file << item.first << ";" << item.second << std::endl;
-	}
-	file.close();
-
-	return true;
+std::string SKMapEditor::GetMapDir()
+{
+	return this->m_mapdir;
 }
 
 

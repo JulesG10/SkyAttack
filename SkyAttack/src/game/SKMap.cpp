@@ -66,27 +66,92 @@ bool SKMap::IsAvailable()
     return this->m_available;
 }
 
-void SKMap::LoadMap(std::string)
+void SKMap::LoadMap(std::string path)
 {
-    // TODO
-    this->m_available = true;
+    this->m_tiles.clear();
 
-    /*
-    float x = 0;
-    float y = 0;
-    for (size_t i = (SKTextureId::NID_LAST_SHIP + 1); i < (SKTextureId::NID_LAST_TILE - 1); i++)
+    std::ifstream file(path);
+    if (!file.good())
     {
-        this->m_tiles.push_back({
-            { x , y,  this->m_scaleTileW,  this->m_scaleTileH },
-            (SKTextureId)i
-        });
+        this->m_available = false;
+        return;
+    }
 
-        x += this->m_scaleTileW;
-        if ((x + this->m_scaleTileW) > this->m_state->m_renderSize.x)
+    std::string line;
+    while (std::getline(file, line))
+    {
+        if (line.length() == 0)
         {
-            x = 0;
-            y += this->m_scaleTileH;
+            break;
+        }
+
+        std::string posX;
+        std::string posY;
+        std::string tid;
+        int change = 0;
+
+        for (size_t i = 0; i < line.length(); i++)
+        {
+            if (line[i] == ';')
+            {
+                change++;
+            }
+            else {
+                switch (change)
+                {
+                case 0:
+                    posX += line[i];
+                    break;
+                case 1:
+                    posY += line[i];
+                    break;
+                case 2:
+                    tid += line[i];
+                    break;
+                default:
+                    break;
+                }
+            }
+        }
+
+        if (tid.length() == 0)
+        {
+            break;
+        }
+        SKTextureId id = (SKTextureId)std::atoi(tid.c_str());
+        if ((id >= SK_MAP_TILE_START && id <= SK_MAP_TILE_END) || id == SKTextureId::ICON_BORDERLIMIT)
+        {
+            Vec2 vec = { 0 };
+            vec.position.x = (float)std::atoi(posX.c_str());
+            vec.position.y = (float)std::atoi(posY.c_str());
+
+            this->m_tiles[vec.value] = id;
         }
     }
-    */
+
+    file.close();
+    this->m_available = true;
+}
+
+bool SKMap::ExportMap(std::string path)
+{
+    if (!this->m_tiles.size())
+    {
+        return false;
+    }
+
+    std::ofstream file(path, std::ios::in | std::ios::trunc);
+    if (!file.good())
+    {
+        return false;
+    }
+
+    for (const std::pair<const double, SKTextureId>& item : this->m_tiles)
+    {
+        Vec2 vec = { item.first };
+        file << (int)vec.position.x << ";" << (int)vec.position.y << ";" << item.second << std::endl;
+    }
+    file.close();
+
+    return true;
 }
