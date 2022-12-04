@@ -32,6 +32,7 @@ protected:
 
 	float m_textureScale = 4.f;
 
+
 	//std::vector<Item> m_items;
 };
 

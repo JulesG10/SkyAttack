@@ -3,90 +3,92 @@
 
 
 
-#define SK_TEXTURE_START 0
-#define SK_TEXTURE_END 156
+#define SK_TEXTURE_START 1
+#define SK_TEXTURE_END 157
 
 
-#define SK_MAP_TILE_START 61
-#define SK_MAP_TILE_END 144
+#define SK_MAP_TILE_START 62
+#define SK_MAP_TILE_END 145
 
 
 SKEXT_EXPORTS typedef enum  SKTextureId {
-		NONE = -1,
+		NONE = 0,
 
-		SHIP_12 = 0,
-		SHIP_11 = 1,
-		SHIP_10 = 2,
-		SHIP_9 = 3,
-		SHIP_8 = 4,
-		SHIP_7 = 5,
-		SHIP_6 = 6,
-		SHIP_5 = 7,
-		SHIP_4 = 8,
-		SHIP_3 = 9,
-		SHIP_2 = 10,
-		SHIP_1 = 11,
+		SHIP_12 = 1,
+		SHIP_11 ,
+		SHIP_10 ,
+		SHIP_9 ,
+		SHIP_8 ,
+		SHIP_7 ,
+		SHIP_6 ,
+		SHIP_5 ,
+		SHIP_4 ,
+		SHIP_3 ,
+		SHIP_2 ,
+		SHIP_1 ,
 
-		NSHIP_12 = 12,
-		NSHIP_11 = 13,
-		NSHIP_10 = 14,
-		NSHIP_9 = 15,
-		NSHIP_8 = 16,
-		NSHIP_7 = 17,
-		NSHIP_6 = 18,
-		NSHIP_5 = 19,
-		NSHIP_4 = 20,
-		NSHIP_3 = 21,
-		NSHIP_2 = 22,
-		NSHIP_1 = 23,
+		NSHIP_12 ,
+		NSHIP_11 ,
+		NSHIP_10 ,
+		NSHIP_9 ,
+		NSHIP_8 ,
+		NSHIP_7 ,
+		NSHIP_6,
+		NSHIP_5 ,
+		NSHIP_4 ,
+		NSHIP_3 ,
+		NSHIP_2,
+		NSHIP_1 ,
 
-		NID_LAST_SHIP = 24,
+		NID_LAST_SHIP = 25,
 
-		BULLET = 25,
-		BULLET_DOUBLE = 26,
-		BULLET_MIN = 27,
+		BULLET ,
+		BULLET_DOUBLE ,
+		BULLET_MIN ,
 
-		BULLET_PING = 28,
+		BULLET_PING ,
 
-		BULLET_HIT = 29,
-		BULLET_BOOM = 30,
-		BULLET_SURIKEN = 31,
-		BULLET_SPLASH = 32,
+		BULLET_HIT ,
+		BULLET_BOOM ,
+		BULLET_SURIKEN ,
+		BULLET_SPLASH ,
 
-		SMOKE = 34,
+		SMOKE ,
 
-		DOT = 35,
-		CROSS = 36,
-		DIV = 37,
+		DOT ,
+		CROSS ,
+		DIV ,
 
-		AMMO = 38,
-		AMMO_DOUBLE = 39,
-		AMMO_CHARGE = 40,
-		AMMO_MIN = 41,
+		AMMO ,
+		AMMO_DOUBLE ,
+		AMMO_CHARGE ,
+		AMMO_MIN ,
+		
+		AMMO_KIT, // todo
 
-		BOOB_TRAP = 43,
+		BOOB_TRAP ,
 
+		// items...
 
+		NUMBER_0 = 52,
+		NUMBER_1 ,
+		NUMBER_2 ,
+		NUMBER_3 ,
+		NUMBER_4 ,
+		NUMBER_5 ,
+		NUMBER_6 ,
+		NUMBER_7 ,
+		NUMBER_8,
+		NUMBER_9 = 61,
 
-		NUMBER_0 = 51,
-		NUMBER_1 = 52,
-		NUMBER_2 = 53,
-		NUMBER_3 = 54,
-		NUMBER_4 = 55,
-		NUMBER_5 = 56,
-		NUMBER_6 = 57,
-		NUMBER_7 = 58,
-		NUMBER_8 = 59,
-		NUMBER_9 = 60,
+		// tiles 62 - 145
 
-		// tiles 61 - 144
+		MENU_TITLE = 146,
 
-		MENU_TITLE = 145,
+		ICON_BORDERLIMIT,
+		ICON_DELETEITEM,
 
-		ICON_BORDERLIMIT = 146,
-		ICON_DELETEITEM = 147,
-
-		NID_LAST_TILE = 148,
+		NID_LAST_TILE,
 
 		CLOUDS_0,
 		CLOUDS_1,

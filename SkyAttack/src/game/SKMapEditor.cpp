@@ -20,7 +20,6 @@ SKMapEditor::SKMapEditor(SKState* state) : SKMap(state)
 	this->m_tileSelectorWidth = 250;
 
 	this->m_save = SK_NEW SKButton(this->m_state, "Save & Quit", { 25, this->m_state->m_renderSize.y - 50, 200, 40 }, WHITE, BLANK);
-	this->m_mapdir = std::string(GetApplicationDirectory()) + "map";
 }
 
 SKMapEditor::~SKMapEditor()
@@ -31,7 +30,7 @@ SKMapEditor::~SKMapEditor()
 void SKMapEditor::UpdateFrame(Rectangle)
 {
 	DrawRectangle(0, 0, this->m_state->m_renderSize.x, this->m_state->m_renderSize.y, { 30,30,30,255 });
-	float speed = 600.f;
+	float speed = 500.f;
 
 	if (IsKeyDown(this->m_state->m_gamekeys[SKGameKeys::LEFT]))
 	{
@@ -51,8 +50,6 @@ void SKMapEditor::UpdateFrame(Rectangle)
 		this->m_position.y += GetFrameTime() * speed;
 	}
 	
-	this->m_position.y -= GetMouseWheelMove() * speed * 100 * GetFrameTime();
-
 	this->m_camera.target.x = ((int)(this->m_position.x / this->m_scaleTileW) * this->m_scaleTileW);
 	this->m_camera.target.y = ((int)(this->m_position.y / this->m_scaleTileH) * this->m_scaleTileH);
 
@@ -113,10 +110,24 @@ void SKMapEditor::UpdateFrame(Rectangle)
 			}
 		}
 
-		this->ExportMap(this->m_mapdir + "\\map_" + std::to_string(ms.count()) + ".sk");
+		if (this->m_loadpath.length() != 0)
+		{
+			this->ExportMap(this->m_loadpath);
+		}
+		else {
+			this->ExportMap(this->m_mapdir + "\\map_" + std::to_string(ms.count()) + ".sk");
+		}
+
 		this->m_quit = true;
 		this->m_available = false;
+		this->m_loadpath = "";
 	}
+}
+
+bool SKMapEditor::LoadMap(std::string path)
+{
+	this->m_loadpath = path;
+	return SKMap::LoadMap(path);
 }
 
 bool SKMapEditor::DrawTileSelector(Vector2 mouse)
@@ -200,10 +211,7 @@ bool SKMapEditor::DrawTileSelector(Vector2 mouse)
 	return hover;
 }
 
-void SKMapEditor::SetAvailable(bool val)
-{
-	this->m_available = val;
-}
+
 
 bool SKMapEditor::HasQuit()
 {
@@ -215,11 +223,14 @@ void SKMapEditor::Clear()
 	this->m_tiles.clear();
 	this->m_position = { 0,0 };
 	this->m_camera.target = { 0,0 };
-}
+	this->m_loadpath = "";
 
-std::string SKMapEditor::GetMapDir()
-{
-	return this->m_mapdir;
+	this->m_view = {
+		this->m_camera.target.x,
+		this->m_camera.target.y,
+		this->m_state->m_renderSize.x,
+		this->m_state->m_renderSize.y
+	};
 }
 
 

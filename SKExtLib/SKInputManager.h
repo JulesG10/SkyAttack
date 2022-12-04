@@ -8,6 +8,7 @@
 #define SK_AZERTY_LEFT 263
 #define SK_AZERTY_RIGHT 262
 #define SK_AZERTY_SHIFT 340
+#define SK_AZERTY_SPACE 32
 
 extern class SKEXT_EXPORTS SKInputManager
 {

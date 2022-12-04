@@ -6,7 +6,12 @@ SKMap::SKMap(SKState* state) : m_state(state)
 
     this->m_scaleTileW = this->m_tileSize.width * this->m_tileScale;
     this->m_scaleTileH = this->m_tileSize.height * this->m_tileScale;
-    this->m_maxTileInView = ceil(this->m_state->m_renderSize.x / this->m_scaleTileW) * ceil(this->m_state->m_renderSize.y / this->m_scaleTileH);
+
+    this->m_maxTileInView = 
+        ceil((this->m_state->m_renderSize.x + this->m_scaleTileW * 1) / this->m_scaleTileW) 
+        * ceil((this->m_state->m_renderSize.y + this->m_scaleTileH * 1) / this->m_scaleTileH);
+
+    this->m_mapdir = std::string(GetApplicationDirectory()) + "map";
 }
 
 SKMap::~SKMap()
@@ -20,10 +25,11 @@ void SKMap::UpdateFrame(Rectangle view)
         return;
     }
 
-    int i = 0;
+
+    this->m_renderTileCount = 0;
     for (std::pair<const double, SKTextureId>& tile : this->m_tiles)
     {
-        if (i >= this->m_maxTileInView)
+        if (this->m_renderTileCount >= this->m_maxTileInView)
         {
             break;
         }
@@ -41,7 +47,7 @@ void SKMap::UpdateFrame(Rectangle view)
                 this->m_tileSize,
                 rect,
                 { 0,0 }, 0, WHITE);
-            i++;
+            this->m_renderTileCount++;
         }
     }
 
@@ -66,15 +72,34 @@ bool SKMap::IsAvailable()
     return this->m_available;
 }
 
-void SKMap::LoadMap(std::string path)
+void SKMap::SetAvailable(bool val)
+{
+    this->m_available = val;
+}
+
+std::string SKMap::GetMapDir()
+{
+    return this->m_mapdir;
+}
+
+int SKMap::GetRenderTileCount()
+{
+    return this->m_renderTileCount;
+}
+
+int SKMap::GetMaxRenderTileCount()
+{
+    return this->m_maxTileInView;
+}
+
+bool SKMap::LoadMap(std::string path)
 {
     this->m_tiles.clear();
 
     std::ifstream file(path);
     if (!file.good())
     {
-        this->m_available = false;
-        return;
+        return false;
     }
 
     std::string line;
@@ -130,7 +155,7 @@ void SKMap::LoadMap(std::string path)
     }
 
     file.close();
-    this->m_available = true;
+    return true;
 }
 
 bool SKMap::ExportMap(std::string path)

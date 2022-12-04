@@ -24,7 +24,7 @@ SKLobby::SKLobby(SKState* state) : m_state(state)
     this->m_shipSrc = { 0 };
     this->m_shipDst = { 0 };
 
-    this->m_player = SK_NEW SKPlayerShip(this->m_state);
+    this->m_player = SK_NEW SKPlayerShip(this->m_state, this->m_map);
 }
 
 SKLobby::~SKLobby()
@@ -38,6 +38,15 @@ SKLobby::~SKLobby()
 void SKLobby::NewConnection()
 {
     this->m_active = true;
+
+    //TODO: load map from lobby server
+    if (this->m_map->LoadMap(this->m_map->GetMapDir() + "\\lobby.sk"))
+    {
+        this->m_map->SetAvailable(true);
+    }
+    else {
+        this->m_map->SetAvailable(false);
+    }
 }
 
 void SKLobby::UpdateFrame()
@@ -108,15 +117,17 @@ void SKLobby::UpdateFrame()
         return;
     }
 
-    /*BeginMode2D(this->m_player->GetCamera());
+    BeginMode2D(this->m_player->GetCamera());
     this->m_map->UpdateFrame(this->m_player->GetView());
     EndMode2D();
 
     this->m_player->UpdateFrame();
-    */
 
-   
+    std::stringstream info;
+    info << "Tiles: " << this->m_map->GetRenderTileCount() << "/" << this->m_map->GetMaxRenderTileCount() << std::endl;
+    DrawText(info.str().c_str(), 0, 20, 20, BLACK);
 }
+
 
 bool SKLobby::InLobby()
 {

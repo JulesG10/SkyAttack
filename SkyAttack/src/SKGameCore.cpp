@@ -166,35 +166,41 @@ void* LoadResources(void* data)
         std::string appdir(GetApplicationDirectory());
 #endif // _DEBUG
         
-        for (size_t i = SK_TEXTURE_START; i <= SK_TEXTURE_END; i++)
+        std::string shortpath;
+        std::string prefix;
+        SKTextureId id;
+        SKTextureId textureId;
+
+        for (size_t i = SK_TEXTURE_START; i < SK_TEXTURE_END; i++)
         {
-            if (i != (int)SKTextureId::NID_LAST_SHIP)
+            id = (SKTextureId)i;
+            textureId = id;
+
+            if (i < (int)SKTextureId::NID_LAST_SHIP)
             {
-                SKTextureId id = (SKTextureId)i;
-                SKTextureId textureId = id;
-
-                std::string shortpath = "assets\\textures\\ships\\";
-                std::string prefix = "ship_";
-
-                if (i > (int)SKTextureId::NID_LAST_SHIP && i < (int)SKTextureId::NID_LAST_TILE)
-                {
-                    textureId = (SKTextureId)((int)textureId - (int)(SKTextureId::NID_LAST_SHIP + 1));
-                    prefix = "tile_";
-                    shortpath = "assets\\textures\\tiles\\";
-                }
-                else if (i > (int)SKTextureId::NID_LAST_TILE && i < (int)SKTextureId::NID_LAST_CLOUD)
-                {
-                    textureId = (SKTextureId)((int)textureId - (int)(SKTextureId::NID_LAST_TILE + 1));
-                    prefix = "cloud_";
-                    shortpath = "assets\\textures\\clouds\\";
-                }
-
-                if (SKValidTextureId(textureId))
-                {
-                    std::string path(appdir + shortpath + SKTexureIdToString(prefix, textureId) + ".png");
-                    self->m_state->m_images[id] = LoadImage(path.c_str());
-                }
+                textureId = (SKTextureId)((int)textureId - 1);
+                prefix = "ship_";
+                shortpath = "assets\\textures\\ships\\";
             }
+            else if (i > (int)SKTextureId::NID_LAST_SHIP && i < (int)SKTextureId::NID_LAST_TILE)
+            {
+                textureId = (SKTextureId)((int)textureId - (int)(SKTextureId::NID_LAST_SHIP + 1));
+                prefix = "tile_";
+                shortpath = "assets\\textures\\tiles\\";
+            }
+            else if (i > (int)SKTextureId::NID_LAST_TILE && i < (int)SKTextureId::NID_LAST_CLOUD)
+            {
+                textureId = (SKTextureId)((int)textureId - (int)(SKTextureId::NID_LAST_TILE + 1));
+                prefix = "cloud_";
+                shortpath = "assets\\textures\\clouds\\";
+            }
+
+            if (SKValidTextureId(textureId))
+            {
+                std::string path(appdir + shortpath + SKTexureIdToString(prefix, textureId) + ".png");
+                self->m_state->m_images[id] = LoadImage(path.c_str());
+            }
+
         }
 
 #ifdef _DEBUG

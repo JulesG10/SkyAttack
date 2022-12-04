@@ -1,7 +1,8 @@
 #include "SKPlayerShip.h"
 
-SKPlayerShip::SKPlayerShip(SKState* state) : SKShip(state)
+SKPlayerShip::SKPlayerShip(SKState* state, SKMap* map) : SKShip(state)
 {
+	this->m_map = map;
 }
 
 SKPlayerShip::~SKPlayerShip()
@@ -55,7 +56,13 @@ void SKPlayerShip::UpdateFrame()
 		}
 	}
 	
+	float lastX = this->m_position.x;
 	this->m_position.x += this->m_velocity.x * GetFrameTime();
+	if (!this->StopLimit())
+	{
+		this->m_position.x = lastX;
+	}
+
 	this->m_position.y += this->m_velocity.y * GetFrameTime();
 
 	this->UpdateCameraTarget();
@@ -83,4 +90,33 @@ void SKPlayerShip::AdjustAngle()
 			}
 		}
 	}
+}
+
+// TODO
+bool SKPlayerShip::StopLimit()
+{
+	Vector2 format = {
+		(int)(this->m_position.x / this->m_map->m_scaleTileW) * this->m_map->m_scaleTileW,
+		(int)(this->m_position.y / this->m_map->m_scaleTileH)* this->m_map->m_scaleTileH
+	};
+
+	int tilesXCount = (int)((this->m_state->m_renderSize.x + this->m_map->m_scaleTileW) / this->m_map->m_scaleTileW);
+	
+	int i = -tilesXCount / 2.f;
+	while (i < tilesXCount/2.f)
+	{
+		Vec2 vec = { 0 };
+		vec.position.x = format.x + i * this->m_map->m_scaleTileW;
+		vec.position.y = format.y;
+
+		SKTextureId id = this->m_map->m_tiles[vec.value];
+		if (id == SKTextureId::ICON_BORDERLIMIT)
+		{
+			return false;
+		}
+
+		i++;
+	}
+
+	return true;
 }
