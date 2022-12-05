@@ -56,14 +56,15 @@ void SKPlayerShip::UpdateFrame()
 		}
 	}
 	
-	float lastX = this->m_position.x;
 	this->m_position.x += this->m_velocity.x * GetFrameTime();
-	if (!this->StopLimit())
+	if (this->StopLimit() != 0)
 	{
-		this->m_position.x = lastX;
+		DrawText("Zone", 0, 40, 20, RED);
+		// TODO damage if in zone
 	}
 
 	this->m_position.y += this->m_velocity.y * GetFrameTime();
+
 
 	this->UpdateCameraTarget();
 
@@ -93,30 +94,28 @@ void SKPlayerShip::AdjustAngle()
 }
 
 // TODO
-bool SKPlayerShip::StopLimit()
+int SKPlayerShip::StopLimit()
 {
 	Vector2 format = {
-		(int)(this->m_position.x / this->m_map->m_scaleTileW) * this->m_map->m_scaleTileW,
-		(int)(this->m_position.y / this->m_map->m_scaleTileH)* this->m_map->m_scaleTileH
+		(int)((this->m_position.x + this->m_desRect.x) / this->m_map->m_scaleTileW)* this->m_map->m_scaleTileW,
+		(int)((this->m_position.y + this->m_desRect.y) / this->m_map->m_scaleTileH)* this->m_map->m_scaleTileH,
 	};
 
-	int tilesXCount = (int)((this->m_state->m_renderSize.x + this->m_map->m_scaleTileW) / this->m_map->m_scaleTileW);
+	int midTilesCount = (int)(this->m_desRect.x / this->m_map->m_scaleTileW) + 2;
 	
-	int i = -tilesXCount / 2.f;
-	while (i < tilesXCount/2.f)
+	for (int i = -midTilesCount; i < midTilesCount; i++)
 	{
 		Vec2 vec = { 0 };
-		vec.position.x = format.x + i * this->m_map->m_scaleTileW;
+		vec.position.x = format.x - i * this->m_map->m_scaleTileW;
 		vec.position.y = format.y;
 
 		SKTextureId id = this->m_map->m_tiles[vec.value];
 		if (id == SKTextureId::ICON_BORDERLIMIT)
 		{
-			return false;
+			return i;
 		}
-
-		i++;
 	}
 
-	return true;
+
+	return 0;
 }

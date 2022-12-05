@@ -105,10 +105,6 @@ void SKMenuTransition::AnimateIn()
 
 void SKMenuTransition::PageTransition(float delay)
 {
-#ifdef _DEBUG
-	delay = 100;
-#endif // _DEBUG
-
 
 	if (!this->m_mode)
 	{

@@ -26,7 +26,7 @@ void SKMenuPage::UpdateFrame()
 		this->m_transition->ShipBackground();
 		this->UpdatePageFrame();
 	}
-	this->m_transition->PageTransition(200);
+	this->m_transition->PageTransition(100);
 	if (this->m_transition->IsWaiting() && this->m_nextPage != SKMenuPages::PAGE_NONE)
 	{
 		*(this->m_page) = this->m_nextPage;

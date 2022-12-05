@@ -122,7 +122,7 @@ void SKMenu::UpdatePageFrame()
 	{
 		DrawText(this->m_loadText.c_str(), this->m_textPosition.x, this->m_textPosition.y, this->m_textSize, WHITE);
 	}
-	this->m_transition->PageTransition(1500);
+	this->m_transition->PageTransition(100);
 
 	if (this->m_transition->IsWaiting() && this->m_nextPage != SKMenuPages::PAGE_NONE)
 	{

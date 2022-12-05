@@ -77,6 +77,7 @@ bool SKGameCore::Init(int argc, char** argv)
         //SetTraceLogLevel(LOG_WARNING | LOG_ERROR | LOG_FATAL);
     }
 #else
+    SetExitKey(KEY_NULL);
     SetTraceLogLevel(LOG_NONE);
 #endif
 

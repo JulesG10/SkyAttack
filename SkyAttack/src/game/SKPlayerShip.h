@@ -12,7 +12,7 @@ public:
 	void UpdateFrame() override;
 private:
 	void AdjustAngle();
-	bool StopLimit();
+	int StopLimit();
 
 	SKMap* m_map;
 };
