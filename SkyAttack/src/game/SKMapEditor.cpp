@@ -30,28 +30,81 @@ SKMapEditor::~SKMapEditor()
 void SKMapEditor::UpdateFrame(Rectangle)
 {
 	DrawRectangle(0, 0, this->m_state->m_renderSize.x, this->m_state->m_renderSize.y, { 30,30,30,255 });
-	float speed = 500.f;
+	float speed = 600.f;
+	bool move = false;
 
 	if (IsKeyDown(this->m_state->m_gamekeys[SKGameKeys::LEFT]))
 	{
 		this->m_position.x -= GetFrameTime() * speed;
+		move = true;
 	}
 	else if (IsKeyDown(this->m_state->m_gamekeys[SKGameKeys::RIGHT]))
 	{
 		this->m_position.x += GetFrameTime() * speed;
+		move = true;
 	}
 	
 	if (IsKeyDown(this->m_state->m_gamekeys[SKGameKeys::SPEEDUP]))
 	{
 		this->m_position.y -= GetFrameTime() * speed;
+		move = true;
 	}
 	else if (IsKeyDown(this->m_state->m_gamekeys[SKGameKeys::SLOWDOWN]))
 	{
 		this->m_position.y += GetFrameTime() * speed;
+		move = true;
 	}
 	
-	this->m_camera.target.x = ((int)(this->m_position.x / this->m_scaleTileW) * this->m_scaleTileW);
-	this->m_camera.target.y = ((int)(this->m_position.y / this->m_scaleTileH) * this->m_scaleTileH);
+	int xFormat = ((int)(this->m_position.x / this->m_scaleTileW) * this->m_scaleTileW);
+	int yFormat = ((int)(this->m_position.y / this->m_scaleTileH) * this->m_scaleTileH);
+
+	
+	if (!move)
+	{
+		float formatMove = GetFrameTime() * (speed / 2.f);
+
+		if ((int)this->m_position.x != xFormat)
+		{
+			if (this->m_position.x > xFormat)
+			{
+				this->m_position.x -= formatMove;
+				if (this->m_position.x < xFormat)
+				{
+					this->m_position.x = xFormat;
+				}
+			}
+			else {
+				this->m_position.x += formatMove;
+				if (this->m_position.x > xFormat)
+				{
+					this->m_position.x = xFormat;
+				}
+			}
+		}
+
+		if ((int)this->m_position.y != yFormat)
+		{
+			if (this->m_position.y > yFormat)
+			{
+				this->m_position.y -= formatMove;
+				if (this->m_position.y < yFormat)
+				{
+					this->m_position.y = xFormat;
+				}
+			}
+			else {
+				this->m_position.y += formatMove;
+				if (this->m_position.y > yFormat)
+				{
+					this->m_position.y = yFormat;
+				}
+			}
+		}
+	}
+
+	this->m_camera.target.x = this->m_position.x;
+	this->m_camera.target.y = this->m_position.y;
+
 
 	if (this->m_view.x != this->m_camera.target.x || this->m_view.y != this->m_camera.target.y)
 	{
@@ -75,9 +128,21 @@ void SKMapEditor::UpdateFrame(Rectangle)
 	if (mouse.x > this->m_tileSelectorWidth)
 	{
 		
-		DrawRectangleLinesEx({ tileMouse.x, tileMouse.y, this->m_scaleTileW, this->m_scaleTileH }, 2, WHITE);
+		DrawRectangleLinesEx({ 
+			tileMouse.x,
+			tileMouse.y,
+			this->m_scaleTileW, this->m_scaleTileH }, 2, WHITE);
+
 		if (IsMouseButtonDown(MOUSE_BUTTON_LEFT))
 		{
+			tileMouse.x -= this->m_camera.target.x;
+			tileMouse.x += xFormat;
+
+			tileMouse.y -= this->m_camera.target.y;
+			tileMouse.y += yFormat;
+
+		
+
 			Vec2 vec = { 0 };
 			vec.position = tileMouse;
 
