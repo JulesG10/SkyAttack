@@ -68,6 +68,7 @@ void SKPlayerShip::UpdateFrame()
 
 	this->UpdateCameraTarget();
 
+
 	SKShip::UpdateFrame();
 }
 
@@ -93,7 +94,6 @@ void SKPlayerShip::AdjustAngle()
 	}
 }
 
-// TODO
 int SKPlayerShip::StopLimit()
 {
 	Vector2 format = {

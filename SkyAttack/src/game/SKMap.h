@@ -1,6 +1,7 @@
 #pragma once
 #include "../../stdafx.h"
 #include "SKShip.h"
+#include "SKBullet.h"
 
 typedef union Vec2 {
 	double value;
@@ -41,9 +42,9 @@ protected:
 	std::string m_mapdir;
 
 	std::vector<SKShip*>  m_ships;
+	std::vector<SKBullet*> m_bullets;
 	std::unordered_map<double, SKTextureId> m_tiles;
 
-	// bullets
 	// items
 	// explosions
 	// etc...

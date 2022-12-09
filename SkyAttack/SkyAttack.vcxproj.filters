@@ -105,6 +105,9 @@
     <ClCompile Include="src\menu\SKMenuMap.cpp">
       <Filter>Fichiers sources\menu</Filter>
     </ClCompile>
+    <ClCompile Include="src\game\SKBullet.cpp">
+      <Filter>Fichiers sources\game</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\SKGameCore.h">
@@ -169,6 +172,9 @@
     </ClInclude>
     <ClInclude Include="src\menu\SKMenuMap.h">
       <Filter>Fichiers d%27en-tête\menu</Filter>
+    </ClInclude>
+    <ClInclude Include="src\game\SKBullet.h">
+      <Filter>Fichiers d%27en-tête\game</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

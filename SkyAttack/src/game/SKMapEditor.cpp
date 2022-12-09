@@ -33,6 +33,11 @@ void SKMapEditor::UpdateFrame(Rectangle)
 	float speed = 600.f;
 	bool move = false;
 
+	if (IsKeyDown(SK_AZERTY_SPACE))
+	{
+		speed *= 2.f;
+	}
+
 	if (IsKeyDown(this->m_state->m_gamekeys[SKGameKeys::LEFT]))
 	{
 		this->m_position.x -= GetFrameTime() * speed;
