@@ -67,6 +67,15 @@ Camera2D SKShip::GetCamera()
     return this->m_camera;
 }
 
+Rectangle SKShip::GetBounds()
+{
+	return Rectangle();
+}
+
+void SKShip::ApplyDamage(float damage)
+{
+}
+
 void SKShip::UpdateCameraTarget()
 {
 	this->m_camera.target.x = this->m_position.x;

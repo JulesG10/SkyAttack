@@ -77,4 +77,6 @@ inline std::vector<std::string> GetDirFiles(const std::string& directory, bool f
     return dir_list;
 }
 
+#define SK_VECREMOVE(vec, lb) vec.erase(std::remove_if(vec.begin(), vec.end(), lb), vec.end());
+
 #endif

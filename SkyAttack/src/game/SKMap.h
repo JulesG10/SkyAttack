@@ -27,6 +27,9 @@ public:
 	int GetRenderTileCount();
 	int GetMaxRenderTileCount();
 
+	int GetRenderBulletCount();
+	int GetMaxRenderBulletCount();
+
 protected:
 	friend class SKPlayerShip;
 
@@ -36,6 +39,7 @@ protected:
 	float m_scaleTileW;
 	float m_scaleTileH;
 	int m_renderTileCount;
+	int m_renderBulletCount;
 
 	bool m_available;
 	SKState* m_state;

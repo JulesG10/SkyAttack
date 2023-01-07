@@ -10,6 +10,7 @@ public:
 	~SKPlayerShip();
 
 	void UpdateFrame() override;
+	Rectangle GetBounds() override;
 private:
 	void AdjustAngle();
 	int StopLimit();

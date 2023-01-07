@@ -56,6 +56,22 @@ void SKPlayerShip::UpdateFrame()
 		}
 	}
 	
+	if (IsKeyPressed(SK_AZERTY_SPACE) || IsMouseButtonPressed(MOUSE_LEFT_BUTTON))
+	{
+
+		SKBulletOptions options = { 0 };
+		options.angle = this->m_angle;
+		options.damage = 10;
+		options.scale = 3;
+		options.size = { 16, 16 };
+		options.origin = { this->m_origin.x - (options.size.x * options.scale) + options.size.x/2.f, this->m_origin.y };
+		options.position = Vector2Add(this->m_position, Vector2Divide(this->m_state->m_renderSize, { 2, 2 }));
+		options.maxDistance = 3000;
+		options.texture = SKTextureId::BULLET;
+		options.velocity = SKBullet::CalculateVelocity(1600.f, this->m_angle - 90);
+		this->m_map->m_bullets.push_back(new SKBullet(this->m_state, options));
+	}
+
 	this->m_position.x += this->m_velocity.x * GetFrameTime();
 	if (this->StopLimit() != 0)
 	{
@@ -70,6 +86,11 @@ void SKPlayerShip::UpdateFrame()
 
 
 	SKShip::UpdateFrame();
+}
+
+Rectangle SKPlayerShip::GetBounds()
+{
+	return this->m_desRect;
 }
 
 void SKPlayerShip::AdjustAngle()

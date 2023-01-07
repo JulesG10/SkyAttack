@@ -4,6 +4,15 @@ SKBullet::SKBullet(SKState* state, SKBulletOptions options)
 {
     this->m_options = options;
     this->m_state = state;
+    this->m_distance = 0;
+}
+
+Vector2 SKBullet::CalculateVelocity(float force, float angle)
+{
+    return  {
+            (force * std::cos(angle * DEG2RAD)),
+            (force * std::sin(angle * DEG2RAD))
+    };
 }
 
 void SKBullet::SetOptions(SKBulletOptions options)
@@ -20,37 +29,40 @@ Rectangle SKBullet::GetView()
 {
     Vector2 position = Vector2Subtract(this->m_options.position, this->m_options.origin);
     return {
-        position.x,
-        position.y,
+        position.x - this->m_state->m_renderSize.x/2.f,
+        position.y - this->m_state->m_renderSize.y/2.f,
         this->m_state->m_renderSize.x,
         this->m_state->m_renderSize.y,
     };
 }
 
-bool SKBullet::UpdateFrame()
+Rectangle SKBullet::GetBounds()
 {
-    DrawTexturePro(
-        this->m_state->m_textures[this->m_options.texture],
-        { 0, 0, this->m_options.size.x, this->m_options.size.y },
-        { this->m_options.position.x, this->m_options.position.y,  this->m_options.size.x * this->m_options.scale, this->m_options.size.y * this->m_options.scale },
-        this->m_options.origin, this->m_options.angle, WHITE
-    );
+    return  { this->m_options.position.x, this->m_options.position.y,  this->m_options.size.x * this->m_options.scale, this->m_options.size.y * this->m_options.scale };
+}
 
-    
-    this->Reduce(&this->m_options.velocity.x);
-    this->Reduce(&this->m_options.velocity.y);
+bool SKBullet::UpdateFrame(bool isInView)
+{
+    if (isInView)
+    {
+        DrawTexturePro(
+            this->m_state->m_textures[this->m_options.texture],
+            { 0, 0, this->m_options.size.x, this->m_options.size.y },
+            { this->m_options.position.x, this->m_options.position.y,  this->m_options.size.x * this->m_options.scale, this->m_options.size.y * this->m_options.scale },
+            this->m_options.origin, this->m_options.angle, WHITE
+        );
+        //DrawText(std::to_string(this->m_distance).c_str(), this->m_options.position.x, this->m_options.position.y, 20, BLACK);
+    }
 
+    float x = this->m_options.position.x;
+    float y = this->m_options.position.y;
     this->m_options.position.x += this->m_options.velocity.x * GetFrameTime();
     this->m_options.position.y += this->m_options.velocity.y * GetFrameTime();
 
-    return !this->m_options.velocity.x && !this->m_options.velocity.y;
-}
-
-void SKBullet::Reduce(float* val)
-{
-    *val *= this->m_options.reducingFactor;
-    if (abs(*val) < 1)
+    this->m_distance += std::abs(Vector2Distance({ x,y }, this->m_options.position));
+    if (this->m_distance >= this->m_options.maxDistance)
     {
-        *val = 0;
+        this->m_options.velocity = { 0,0 };
     }
+    return !this->m_options.velocity.x && !this->m_options.velocity.y;
 }

@@ -6,7 +6,7 @@ typedef struct SKBulletOptions {
 	Vector2 position;
 	Vector2 velocity;
 
-	float reducingFactor;
+	float maxDistance;
 	int damage;
 
 	Vector2 origin;
@@ -22,14 +22,16 @@ class SKBullet
 {
 public:
 	SKBullet(SKState* state, SKBulletOptions options);
+	static Vector2 CalculateVelocity(float force, float angle);
 
 	void SetOptions(SKBulletOptions options);
 	SKBulletOptions GetOptions();
 
 	Rectangle GetView();
-	bool UpdateFrame();
+	Rectangle GetBounds();
+	bool UpdateFrame(bool isInView);
 private:
-	void Reduce(float*);
+	float m_distance;
 	SKBulletOptions m_options;
 	SKState* m_state;
 };

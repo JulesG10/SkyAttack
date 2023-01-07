@@ -35,6 +35,8 @@ void SKMap::UpdateFrame(Rectangle view)
     }
 
     this->m_renderTileCount = 0;
+    this->m_renderBulletCount = 0;
+
     for (std::pair<const double, SKTextureId>& tile : this->m_tiles)
     {
         if (this->m_renderTileCount >= this->m_maxTileInView)
@@ -59,7 +61,6 @@ void SKMap::UpdateFrame(Rectangle view)
         }
     }
 
-    size_t bulletIndex = 0;
     size_t itemIndex = 0;
     for (SKShip* ship : this->m_ships)
     {
@@ -68,65 +69,35 @@ void SKMap::UpdateFrame(Rectangle view)
             ship->UpdateFrame();
         }
 
-        /*
-        bulletIndex = 0;
-        for (SKBullet* bullet : this->m_bullets)
+        
+        /*for (SKBullet* bullet : this->m_bullets)
         {
-            if (CheckCollisionRecs(ship->GetBounds(), bullet->GetBounds()))
+           if (CheckCollisionRecs(ship->GetBounds(), bullet->GetBounds()))
             {
                 ship->ApplyDamage(bullet->GetOptions().damage);
-                this->m_bullets.erase(this->m_bullets.begin() + bulletIndex);
+                SK_VECREMOVE(this->m_bullets, bullet);
                 delete bullet;
-                bulletIndex--;
             }
-            bulletIndex++;
-        }
-        
-
-        
-        itemIndex = 0;
-        for (SKItem* item : this->m_items)
-        {
-            if (CheckCollisionRecs(ship->GetBounds(), item->GetBounds()))
-            {
-                if (ship->AddItem(bullet->GetOptions().damage))
-                {
-                    this->m_items.erase(this->m_items.begin() + itemIndex);
-                    delete item;
-                    itemIndex--;
-                }
-            }
-            itemIndex++;
-        }
-        */
+        }*/
     }
 
-    bulletIndex = 0;
     for (SKBullet* bullet : this->m_bullets)
     {
-        if (CheckCollisionRecs(view, bullet->GetView()))
+        bool isInView = CheckCollisionRecs(view, bullet->GetView());
+        if (isInView)
         {
-            if (!bullet->UpdateFrame())
-            {
-                this->m_bullets.erase(this->m_bullets.begin() + bulletIndex);
-                delete bullet;
-                bulletIndex--;
-            }
+            this->m_renderBulletCount++;
         }
-        bulletIndex++;
+        if (bullet->UpdateFrame(isInView))
+        {
+            SK_VECREMOVE(this->m_bullets,
+                [&](SKBullet* bt) {
+                    return bullet == bt;
+                });
+            delete bullet;
+        }
     }
 
-    /*
-    itemIndex = 0;
-    for (SKItem* item : this->m_items)
-    {
-        if (CheckCollisionRecs(view, item->GetView()))
-        {
-            item->UpdateFrame();
-        }
-        itemIndex++;
-    }
-    */
 }
 
 void SKMap::SpawnShip(SKShip* ship)
@@ -158,6 +129,16 @@ int SKMap::GetRenderTileCount()
 int SKMap::GetMaxRenderTileCount()
 {
     return this->m_maxTileInView;
+}
+
+int SKMap::GetRenderBulletCount()
+{
+    return this->m_renderBulletCount;
+}
+
+int SKMap::GetMaxRenderBulletCount()
+{
+    return this->m_bullets.size();
 }
 
 bool SKMap::LoadMap(std::string path)

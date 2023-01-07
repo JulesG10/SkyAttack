@@ -124,7 +124,8 @@ void SKLobby::UpdateFrame()
     this->m_player->UpdateFrame();
 
     std::stringstream info;
-    info << "Tiles: " << this->m_map->GetRenderTileCount() << "/" << this->m_map->GetMaxRenderTileCount() << std::endl;
+    info << "Tiles: " << this->m_map->GetRenderTileCount() << "/" << this->m_map->GetMaxRenderTileCount() << std::endl
+        << "Bullets: " << this->m_map->GetRenderBulletCount() << "/" << this->m_map->GetMaxRenderBulletCount() << std::endl;
     DrawText(info.str().c_str(), 0, 20, 20, BLACK);
 }
 

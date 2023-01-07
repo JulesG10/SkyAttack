@@ -11,7 +11,8 @@ public:
 	virtual void UpdateFrame();
 	virtual Rectangle GetView();
 	virtual Camera2D GetCamera();
-
+	virtual Rectangle GetBounds();
+	virtual void ApplyDamage(float);
 protected:
 	void UpdateCameraTarget();
 
